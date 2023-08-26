@@ -12,6 +12,38 @@ function SignupPage() {
   const [description, setDescription] = useState("");
   const [activity, setActivity] = useState([]);
   const [error, setError] = useState("");
+  const [roles] = useState([
+    {
+      label: "student",
+      value: "student",
+    },
+    {
+      label: "coach",
+      value: "coach",
+      field: (
+        <>
+          <div>
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              id="description"
+            />
+          </div>
+          <div>
+            <label htmlFor="activity">Activity</label>
+            <input
+              type="text"
+              value={activity}
+              onChange={(e) => setActivity(e.target.value)}
+              id="activity"
+            />
+          </div>
+        </>
+      ),
+    },
+  ]);
 
   const [role, setRole] = useState("student");
 
@@ -80,8 +112,13 @@ function SignupPage() {
       <div>
         <label htmlFor="role">You are:</label>
         <select name="role" id="role" onChange={handleRoleSelect} value={role}>
-          <option value={role}>Student</option>
-          <option value={role}>Coach</option>
+          {roles.map((role) => (
+            <option key={role.value} value={role.value}>
+              {role.label}
+            </option>
+          ))}
+          {/* <option value={role}>Student</option>
+          <option value={role}>Coach</option> */}
         </select>
         {role === "coach" && (
           <>
