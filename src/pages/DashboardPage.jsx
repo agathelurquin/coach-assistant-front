@@ -3,7 +3,8 @@ import { UserContext } from "../context/AuthContext";
 
 function DashboardPage() {
   const { user } = useContext(UserContext);
-  console.log(user);
+
+  console.log("hereeee", useContext(UserContext));
   return (
     <>
       <h2>Dashboard</h2>
