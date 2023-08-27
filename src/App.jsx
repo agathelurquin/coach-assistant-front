@@ -4,7 +4,9 @@ import NavBar from "./components/Navbar";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsLoggedIn from "./components/IsLoggedIn";
-import DashboardPage from "./pages/DashboardPAGE.JSX";
+import IsCoach from "./components/IsCoach";
+import DashboardPage from "./pages/DashboardPage.jsx";
+import NewTrainingPage from "./pages/NewTrainingPage";
 
 import "./App.css";
 
@@ -18,6 +20,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<IsLoggedIn />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/trainings" element={<IsCoach />}>
+            <Route path="/trainings" element={<NewTrainingPage />} />
+          </Route>
         </Route>
       </Routes>
     </>
