@@ -8,7 +8,6 @@ const defaultTrainingValues = {
   name: "",
   description: "",
   trainingDate: "",
-  trainingTime: "",
   duration: "",
   location: "",
   price: "",
@@ -84,16 +83,6 @@ function NewTrainingPage() {
           />
         </div>
         <div>
-          <label htmlFor="trainingTime">Time of the training: </label>
-          <input
-            type="time"
-            name="trainingTime"
-            value={training.trainingTime}
-            onChange={handleChange}
-            disabled={submitting}
-          />
-        </div>
-        <div>
           <label htmlFor="trainingDate">Date of the training: </label>
           <DateTimePicker
             name="trainingDate"
@@ -102,15 +91,8 @@ function NewTrainingPage() {
               setTraining((training) => ({ ...training, trainingDate: value }))
             }
             disabled={submitting}
-            label="Basic date time picker"
+            label="Workout Date and Time"
           />
-          {/* <input
-            type="date"
-            name="trainingDate"
-            value={training.trainingDate}
-            onChange={handleChange}
-            disabled={submitting}
-          /> */}
         </div>
         <div>
           <label htmlFor="duration">Duration of the training: </label>

@@ -2,20 +2,23 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
-import OneTraining from "../components/OneTraining";
+import OneTrainingCard from "./OneTrainingCard";
 
 function CoachTrainings() {
   const [coachTrainings, setCoachTrainings] = useState([]);
 
   useEffect(() => {
+    getAllTrainings();
+  }, []);
+
+  function getAllTrainings() {
     myApi
       .get(`${API_URL}/api/trainings`)
       .then((res) => {
         setCoachTrainings([...res.data]);
       })
       .catch((e) => console.log(e));
-  }, []);
-
+  }
   // console.log(coachTrainings);
   return (
     <div className="dashboard-action">
@@ -23,7 +26,11 @@ function CoachTrainings() {
       <Link to="/trainings">Add New Training Slot</Link>
       {coachTrainings.map((training) => {
         return (
-          <OneTraining key={training._id} training={training} />
+          <OneTrainingCard
+            key={training._id}
+            training={training}
+            getAllTrainings={getAllTrainings}
+          />
           // <div key={training._id}>
           //   <h4>{training.name}</h4>
           //   <p>{training.description}</p>
