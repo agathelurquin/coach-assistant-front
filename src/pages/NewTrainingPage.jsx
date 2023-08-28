@@ -1,14 +1,13 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/AuthContext";
 import myApi from "../api/service";
-// import axios from "axios";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const defaultTrainingValues = {
   name: "",
   description: "",
   trainingDate: "",
-  trainingTime: "",
   duration: "",
   location: "",
   price: "",
@@ -47,7 +46,7 @@ function NewTrainingPage() {
   }, [user._id]);
 
   const handleChange = (e) => {
-    console.log("the value", e.target.value, e.target);
+    console.log("the value", e.target);
     const inputValue = e.target.value;
     setTraining((prevTraining) => ({
       ...prevTraining,
@@ -84,23 +83,15 @@ function NewTrainingPage() {
           />
         </div>
         <div>
-          <label htmlFor="trainingTime">Time of the training: </label>
-          <input
-            type="time"
-            name="trainingTime"
-            value={training.trainingTime}
-            onChange={handleChange}
-            disabled={submitting}
-          />
-        </div>
-        <div>
           <label htmlFor="trainingDate">Date of the training: </label>
-          <input
-            type="date"
+          <DateTimePicker
             name="trainingDate"
             value={training.trainingDate}
-            onChange={handleChange}
+            onChange={(value) =>
+              setTraining((training) => ({ ...training, trainingDate: value }))
+            }
             disabled={submitting}
+            label="Workout Date and Time"
           />
         </div>
         <div>

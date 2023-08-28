@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import NavBar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsLoggedIn from "./components/IsLoggedIn";
 import IsCoach from "./components/IsCoach";
-import DashboardPage from "./pages/DashboardPage.jsx";
+import DashboardPage from "./pages/DashboardPage";
 import NewTrainingPage from "./pages/NewTrainingPage";
 
 import "./App.css";
