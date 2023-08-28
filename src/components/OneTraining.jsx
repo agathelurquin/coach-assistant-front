@@ -20,14 +20,17 @@ function OneTraining(props) {
       <p>{description}</p>
       <p>
         {`
-        ${trainingTime} - ${trainingDate}
+        ${trainingTime} - ${new Intl.DateTimeFormat("en-EN", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }).format(new Date(trainingDate))}
         duration: ${duration}
         location: ${location}
         workout: ${activityType}
         coaching type: ${type}
         available spots: ${availableSpots}
         participants: ${participants}
-        status: ${booked ? "booked" : "available"}}
+        status: ${booked ? "booked" : "available"}
       `}
       </p>
     </div>
