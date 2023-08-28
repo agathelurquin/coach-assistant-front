@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import CoachTrainings from "../components/CoachTrainings";
 
 function DashboardPage() {
   const { user } = useContext(UserContext);
@@ -11,12 +11,7 @@ function DashboardPage() {
       <h2>Dashboard</h2>
       <p>{user.role}</p>
 
-      {user.role === "coach" && (
-        <div className="dashboard-action">
-          <h3>My Training</h3>
-          <Link to="/trainings">Add New Training Slot</Link>
-        </div>
-      )}
+      {user.role === "coach" && <CoachTrainings />}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/AuthContext";
-import axios from "axios";
+import myApi from "../api/service";
+// import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const defaultTrainingValues = {
@@ -31,7 +32,7 @@ function NewTrainingPage() {
     const requestBody = { ...training, coach: user._id };
     setSubmitting(true);
 
-    axios
+    myApi
       .post(`${API_URL}/api/trainings`, requestBody)
       .then((res) => {
         console.log(res);

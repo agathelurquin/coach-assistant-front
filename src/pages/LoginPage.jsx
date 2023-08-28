@@ -20,8 +20,7 @@ function LoginPage() {
       .then((response) => {
         console.log(response);
         localStorage.setItem("authToken", response.data.authToken);
-        authenticateUser();
-        navigate("/dashboard");
+        authenticateUser().then(() => navigate("/dashboard"));
       })
       .catch((e) => {
         if (error.response) {

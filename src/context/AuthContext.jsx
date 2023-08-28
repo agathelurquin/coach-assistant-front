@@ -9,7 +9,7 @@ function AuthContextWrapper({ children }) {
 
   function authenticateUser() {
     console.log("authenticateUser function running");
-    myApi
+    return myApi
       .verifyUser()
       .then((res) => {
         setIsLoggedIn(true);
