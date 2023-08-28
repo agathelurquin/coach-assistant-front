@@ -12,9 +12,13 @@ function Navbar() {
   }
   return (
     <>
-      <div>
+      <div className="navbar">
         <Link to="/">
-          <img src="src/assets/img/default_avatar.png" alt="home-logo" />
+          <img
+            src="src/assets/img/default_avatar.png"
+            className="logo-navbar"
+            alt="home-logo"
+          />
         </Link>
         <Link to="/signup">Signup</Link>
         <Link to="/login">Log In</Link>

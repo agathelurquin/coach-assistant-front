@@ -6,7 +6,6 @@ const myApi = axios.create({
 
 myApi.interceptors.request.use((request) => {
   request.headers.Authorization = `Bearer ${localStorage.getItem("authToken")}`;
-  console.log("interceptor", request);
   return request;
 });
 

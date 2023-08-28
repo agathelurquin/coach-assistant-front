@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
+import CoachTrainings from "../components/CoachTrainings";
 
 function DashboardPage() {
   const { user } = useContext(UserContext);
@@ -9,6 +10,8 @@ function DashboardPage() {
     <>
       <h2>Dashboard</h2>
       <p>{user.role}</p>
+
+      {user.role === "coach" && <CoachTrainings />}
     </>
   );
 }
