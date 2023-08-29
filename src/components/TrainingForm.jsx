@@ -2,12 +2,12 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/AuthContext";
 import myApi from "../api/service";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-
+import dayjs from "dayjs";
 const API_URL = import.meta.env.VITE_API_URL;
 const defaultTrainingValues = {
   name: "",
   description: "",
-  trainingDate: "",
+  trainingDate: dayjs(new Date()),
   duration: "",
   location: "",
   price: "",
@@ -21,7 +21,7 @@ const defaultTrainingValues = {
 
 function TrainingForm(props) {
   const idToEdit = props.oneTraining;
-  let trainingToEdit = {};
+  // let trainingToEdit = {};
   const submitAction = props.submitAction;
   const { user } = useContext(UserContext);
   console.log("in the settraining function", user._id);
@@ -49,46 +49,57 @@ function TrainingForm(props) {
     myApi
       .get(`${API_URL}/api/trainings/${idToEdit}`)
       .then((res) => {
-        trainingToEdit = res.data;
-        console.log("label to edit", trainingToEdit.name);
+        // trainingToEdit = res.data;
+        // const { name, description, trainingDate } = trainingToEdit;
+        // console.log("label to edit", name);
+
+        setTraining({
+          ...res.data,
+          trainingDate: dayjs(res.data.trainingDate),
+        });
       })
       .catch((e) => console.log(e));
   }
 
-  if (submitAction === "edit") {
-    setTrainingToEdit();
-    // defaultTrainingValues.name = trainingToEdit.name
-    // defaultTrainingValues.description = trainingToEdit.description;
-    // console.log("name", trainingToEdit.name);
-    // defaultTrainingValues.trainingDate = ,
-    // defaultTrainingValues.duration = ,
-    // defaultTrainingValues.location = ,
-    // defaultTrainingValues.price,
-    // defaultTrainingValues.activityType: "",
-    // defaultTrainingValues.coach: "",
-    // defaultTrainingValues.type: "",
-    // defaultTrainingValues.availableSpots: "",
-    // defaultTrainingValues.participants: [],
-    // defaultTrainingValues.booked: false,
-  }
+  // if (submitAction === "edit") {
+  //   setTrainingToEdit();
+  //   // defaultTrainingValues.name = trainingToEdit.name
+  //   // defaultTrainingValues.description = trainingToEdit.description;
+  //   // console.log("name", trainingToEdit.name);
+  //   // defaultTrainingValues.trainingDate = ,
+  //   // defaultTrainingValues.duration = ,
+  //   // defaultTrainingValues.location = ,
+  //   // defaultTrainingValues.price,
+  //   // defaultTrainingValues.activityType: "",
+  //   // defaultTrainingValues.coach: "",
+  //   // defaultTrainingValues.type: "",
+  //   // defaultTrainingValues.availableSpots: "",
+  //   // defaultTrainingValues.participants: [],
+  //   // defaultTrainingValues.booked: false,
+  // }
 
   const handleEdit = (e) => {
     e.preventDefault();
     const requestBody = { ...training, coach: user._id };
     setSubmitting(true);
+    for (const key in requestBody) {
+      if (requestBody[key] === "") {
+        requestBody[key] = undefined;
+      }
+    }
 
     myApi
       .patch(`${API_URL}/api/trainings/${idToEdit}`, requestBody)
       .then(() => {
-        setTraining({ ...trainingToEdit, coach: user._id });
+        setTraining({ ...training, coach: user._id });
         setSubmitting(false);
       })
       .catch((e) => console.log(e));
   };
 
-  useEffect(() => {
-    setTraining({ ...defaultTrainingValues, coach: user._id });
-  }, [user._id]);
+  // useEffect(() => {
+  //   setTraining({ ...defaultTrainingValues, coach: user._id });
+  // }, [user._id]);
 
   const handleChange = (e) => {
     console.log("the value", e.target);
@@ -101,9 +112,15 @@ function TrainingForm(props) {
   };
 
   useEffect(() => {
-    setTraining({ ...defaultTrainingValues });
-  }, [user._id]);
+    if (submitAction === "edit") {
+      setTrainingToEdit();
+    }
+  }, []);
+  // useEffect(() => {
+  //   setTraining({ ...defaultTrainingValues });
+  // }, [user._id]);
 
+  console.log("HERE =============> ", training.trainingDate);
   return (
     <div className="training-form">
       <h3>
@@ -117,7 +134,7 @@ function TrainingForm(props) {
           <input
             type="text"
             name="name"
-            label={trainingToEdit.name}
+            placeholder=""
             value={training.name}
             onChange={handleChange}
             disabled={submitting}
@@ -138,6 +155,7 @@ function TrainingForm(props) {
           <DateTimePicker
             name="trainingDate"
             value={training.trainingDate}
+            inputFormat=""
             onChange={(value) =>
               setTraining((training) => ({ ...training, trainingDate: value }))
             }
