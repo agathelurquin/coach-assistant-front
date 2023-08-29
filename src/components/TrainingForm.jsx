@@ -4,6 +4,8 @@ import myApi from "../api/service";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
 const API_URL = import.meta.env.VITE_API_URL;
+
+// default values for the create route
 const defaultTrainingValues = {
   name: "",
   description: "",
@@ -20,39 +22,36 @@ const defaultTrainingValues = {
 };
 
 function TrainingForm(props) {
-  const idToEdit = props.oneTraining;
-  // let trainingToEdit = {};
-  const submitAction = props.submitAction;
-  const { user } = useContext(UserContext);
-  console.log("in the settraining function", user._id);
   const [training, setTraining] = useState({ ...defaultTrainingValues });
   const [submitting, setSubmitting] = useState(false);
   const trainingTypeOptions = ["private", "group", "pro"];
+  // additional var for the edit route
+  const idToEdit = props.oneTraining;
+  const submitAction = props.submitAction;
+  const { user } = useContext(UserContext);
 
+  // submit for the create route
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const requestBody = { ...training, coach: user._id };
     setSubmitting(true);
-
+    // send the training object then resets the form values
     myApi
       .post(`${API_URL}/api/trainings`, requestBody)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setTraining({ ...defaultTrainingValues, coach: user._id });
         setSubmitting(false);
       })
       .catch((e) => console.log(e));
   };
 
+  // fetch the training we want to edit
+  // assign its values to our training object
+  // format the trainingData field because of MUI component value format constraints
   function setTrainingToEdit() {
     myApi
       .get(`${API_URL}/api/trainings/${idToEdit}`)
       .then((res) => {
-        // trainingToEdit = res.data;
-        // const { name, description, trainingDate } = trainingToEdit;
-        // console.log("label to edit", name);
-
         setTraining({
           ...res.data,
           trainingDate: dayjs(res.data.trainingDate),
@@ -61,27 +60,14 @@ function TrainingForm(props) {
       .catch((e) => console.log(e));
   }
 
-  // if (submitAction === "edit") {
-  //   setTrainingToEdit();
-  //   // defaultTrainingValues.name = trainingToEdit.name
-  //   // defaultTrainingValues.description = trainingToEdit.description;
-  //   // console.log("name", trainingToEdit.name);
-  //   // defaultTrainingValues.trainingDate = ,
-  //   // defaultTrainingValues.duration = ,
-  //   // defaultTrainingValues.location = ,
-  //   // defaultTrainingValues.price,
-  //   // defaultTrainingValues.activityType: "",
-  //   // defaultTrainingValues.coach: "",
-  //   // defaultTrainingValues.type: "",
-  //   // defaultTrainingValues.availableSpots: "",
-  //   // defaultTrainingValues.participants: [],
-  //   // defaultTrainingValues.booked: false,
-  // }
-
+  // submit for the edit route
   const handleEdit = (e) => {
     e.preventDefault();
     const requestBody = { ...training, coach: user._id };
     setSubmitting(true);
+
+    // prevent non-modified values to be considered as "to delete" from the db
+    // by setting them as undefined if not modified, so that the db won't process them
     for (const key in requestBody) {
       if (requestBody[key] === "") {
         requestBody[key] = undefined;
@@ -97,13 +83,7 @@ function TrainingForm(props) {
       .catch((e) => console.log(e));
   };
 
-  // useEffect(() => {
-  //   setTraining({ ...defaultTrainingValues, coach: user._id });
-  // }, [user._id]);
-
   const handleChange = (e) => {
-    console.log("the value", e.target);
-
     const inputValue = e.target.value;
     setTraining((prevTraining) => ({
       ...prevTraining,
@@ -111,16 +91,13 @@ function TrainingForm(props) {
     }));
   };
 
+  // Only one useEffect executed when we load the page to define if our training object is empty or has previously set values
   useEffect(() => {
     if (submitAction === "edit") {
       setTrainingToEdit();
     }
   }, []);
-  // useEffect(() => {
-  //   setTraining({ ...defaultTrainingValues });
-  // }, [user._id]);
 
-  console.log("HERE =============> ", training.trainingDate);
   return (
     <div className="training-form">
       <h3>
@@ -128,7 +105,7 @@ function TrainingForm(props) {
           ? "Update your training info"
           : "Add a new training slot"}
       </h3>
-      <form onSubmit={submitAction === "create" ? handleSubmit : handleEdit}>
+      <form onSubmit={submitAction === "edit" ? handleEdit : handleSubmit}>
         <div>
           <label htmlFor="name">Training Name: </label>
           <input
@@ -155,7 +132,7 @@ function TrainingForm(props) {
           <DateTimePicker
             name="trainingDate"
             value={training.trainingDate}
-            inputFormat=""
+            // inputFormat=""
             onChange={(value) =>
               setTraining((training) => ({ ...training, trainingDate: value }))
             }
