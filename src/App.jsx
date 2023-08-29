@@ -9,6 +9,7 @@ import DashboardPage from "./pages/DashboardPage";
 import NewTrainingPage from "./pages/NewTrainingPage";
 
 import "./App.css";
+import OneTrainingPage from "./pages/OneTrainingPage";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/trainings" element={<IsCoach />}>
             <Route path="/trainings" element={<NewTrainingPage />} />
+            <Route
+              path="/trainings/:trainingId"
+              element={<OneTrainingPage />}
+            />
           </Route>
         </Route>
       </Routes>

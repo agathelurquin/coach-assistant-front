@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,13 +24,6 @@ function OneTrainingCard(props) {
       .catch((e) => console.log(e));
   };
 
-  console.log(
-    "one traiing componenent:",
-    oneTraining,
-    "and id:",
-    oneTraining._id
-  );
-
   return (
     <div className="training-card">
       <div className="card-info">
@@ -52,7 +46,9 @@ function OneTrainingCard(props) {
         </p>
       </div>
       <div className="card-actions">
-        <button>Edit</button>
+        <Link to={`/trainings/${oneTraining._id}`}>
+          <button>Edit</button>
+        </Link>
         <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
