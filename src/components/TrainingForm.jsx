@@ -115,7 +115,6 @@ function TrainingForm(props) {
           <input
             type="text"
             name="name"
-            placeholder=""
             value={training.name}
             onChange={handleChange}
             disabled={submitting}
