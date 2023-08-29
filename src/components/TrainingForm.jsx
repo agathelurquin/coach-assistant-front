@@ -19,7 +19,10 @@ const defaultTrainingValues = {
   booked: false,
 };
 
-function NewTrainingPage() {
+function TrainingForm(props) {
+  const idToEdit = props.oneTraining;
+  let trainingToEdit = {};
+  const submitAction = props.submitAction;
   const { user } = useContext(UserContext);
   console.log("in the settraining function", user._id);
   const [training, setTraining] = useState({ ...defaultTrainingValues });
@@ -28,6 +31,7 @@ function NewTrainingPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const requestBody = { ...training, coach: user._id };
     setSubmitting(true);
 
@@ -41,12 +45,54 @@ function NewTrainingPage() {
       .catch((e) => console.log(e));
   };
 
+  function setTrainingToEdit() {
+    myApi
+      .get(`${API_URL}/api/trainings/${idToEdit}`)
+      .then((res) => {
+        trainingToEdit = res.data;
+        console.log("label to edit", trainingToEdit.name);
+      })
+      .catch((e) => console.log(e));
+  }
+
+  if (submitAction === "edit") {
+    setTrainingToEdit();
+    // defaultTrainingValues.name = trainingToEdit.name
+    // defaultTrainingValues.description = trainingToEdit.description;
+    // console.log("name", trainingToEdit.name);
+    // defaultTrainingValues.trainingDate = ,
+    // defaultTrainingValues.duration = ,
+    // defaultTrainingValues.location = ,
+    // defaultTrainingValues.price,
+    // defaultTrainingValues.activityType: "",
+    // defaultTrainingValues.coach: "",
+    // defaultTrainingValues.type: "",
+    // defaultTrainingValues.availableSpots: "",
+    // defaultTrainingValues.participants: [],
+    // defaultTrainingValues.booked: false,
+  }
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const requestBody = { ...training, coach: user._id };
+    setSubmitting(true);
+
+    myApi
+      .patch(`${API_URL}/api/trainings/${idToEdit}`, requestBody)
+      .then(() => {
+        setTraining({ ...trainingToEdit, coach: user._id });
+        setSubmitting(false);
+      })
+      .catch((e) => console.log(e));
+  };
+
   useEffect(() => {
     setTraining({ ...defaultTrainingValues, coach: user._id });
   }, [user._id]);
 
   const handleChange = (e) => {
     console.log("the value", e.target);
+
     const inputValue = e.target.value;
     setTraining((prevTraining) => ({
       ...prevTraining,
@@ -60,13 +106,18 @@ function NewTrainingPage() {
 
   return (
     <div className="training-form">
-      <h3>Add a new training slot</h3>
-      <form onSubmit={handleSubmit}>
+      <h3>
+        {submitAction === "edit"
+          ? "Update your training info"
+          : "Add a new training slot"}
+      </h3>
+      <form onSubmit={submitAction === "create" ? handleSubmit : handleEdit}>
         <div>
           <label htmlFor="name">Training Name: </label>
           <input
             type="text"
             name="name"
+            label={trainingToEdit.name}
             value={training.name}
             onChange={handleChange}
             disabled={submitting}
@@ -160,10 +211,14 @@ function NewTrainingPage() {
             disabled={submitting}
           />
         </div>
-        <button>Add Training</button>
+
+        <button>
+          {" "}
+          {submitAction === "edit" ? "Edit Training" : "Add Training"}
+        </button>
       </form>
     </div>
   );
 }
 
-export default NewTrainingPage;
+export default TrainingForm;
