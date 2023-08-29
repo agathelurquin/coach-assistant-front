@@ -34,16 +34,11 @@ function OneTrainingCard(props) {
     const requestbody = {
       training: oneTraining._id,
       client: user._id,
+      coach: oneTraining.coach,
     };
     myApi
       .post(`${API_URL}/api/bookings`, requestbody)
       .then(() => {
-        //myApi.patch(`${API_URL}/api/trainings/${oneTraining._id}`, {})
-        // as a consequence, we want to push this userId to the list of participants
-        // we can do oneTraining.participants.push(user._id) but it doesn't save to the db
-        // So we need a patch.
-        // How do we do a patch .push
-
         setBookingMessage("Booked!");
       })
       .catch((e) => console.log(e));

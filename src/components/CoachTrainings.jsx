@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "./OneTrainingCard";
+import OneBookingCard from "./OneBookingCard";
 
 function CoachTrainings(props) {
   const coachId = props.coachId;
   console.log("our coach Id is: ", coachId);
   const [coachTrainings, setCoachTrainings] = useState([]);
+  const [coachBookings, setCoachBookings] = useState([]);
 
   useEffect(() => {
     getAllTrainings();
+    getBookedClasses();
   }, []);
 
   function getAllTrainings() {
@@ -22,7 +25,19 @@ function CoachTrainings(props) {
       })
       .catch((e) => console.log(e));
   }
-  // console.log(coachTrainings);
+
+  function getBookedClasses() {
+    myApi
+      .get(`${API_URL}/api/bookings/coach`)
+      .then((res) => {
+        setCoachBookings(res.data);
+        console.log("response", res.data, "stored", coachBookings);
+      })
+      .catch((e) => console.log(e));
+    //get /bookings/coaches/trainings/coaches/:coachId
+    // find
+  }
+
   return (
     <div className="dashboard-action">
       <h3>My Trainings</h3>
@@ -33,6 +48,16 @@ function CoachTrainings(props) {
             key={training._id}
             training={training}
             getAllTrainings={getAllTrainings}
+          />
+        );
+      })}
+      <h3>Classes Booked:</h3>
+      {coachBookings.map((booking) => {
+        return (
+          <OneBookingCard
+            key={booking._id}
+            oneBooking={booking}
+            getAllBookings={getBookedClasses}
           />
         );
       })}

@@ -4,11 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "./OneTrainingCard";
 import OneBookingCard from "./OneBookingCard";
 
-// import { UserContext } from "../context/AuthContext";
-// import { useContext } from "react";
-
 function ClientDashboard() {
-  // const { user } = useContext(UserContext);
   const [clientBookings, setClientBookings] = useState([]);
   const [allTrainings, setAllTrainings] = useState([]);
   function getAllTrainings() {
@@ -19,13 +15,6 @@ function ClientDashboard() {
   }
 
   function getClientBookings() {
-    myApi
-      .get(`${API_URL}/api/bookings/client`)
-      .then((res) => setClientBookings(res.data))
-      .catch((e) => console.log(e));
-  }
-
-  function getClientActiveBookings() {
     myApi
       .get(`${API_URL}/api/bookings/client`)
       .then((res) => setClientBookings(res.data))
