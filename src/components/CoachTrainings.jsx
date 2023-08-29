@@ -4,7 +4,9 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "./OneTrainingCard";
 
-function CoachTrainings() {
+function CoachTrainings(props) {
+  const coachId = props.coachId;
+  console.log("our coach Id is: ", coachId);
   const [coachTrainings, setCoachTrainings] = useState([]);
 
   useEffect(() => {
@@ -13,8 +15,9 @@ function CoachTrainings() {
 
   function getAllTrainings() {
     myApi
-      .get(`${API_URL}/api/trainings`)
+      .get(`${API_URL}/api/trainings/coach/${coachId}`)
       .then((res) => {
+        console.log("our response: ", res.data);
         setCoachTrainings([...res.data]);
       })
       .catch((e) => console.log(e));
@@ -31,10 +34,6 @@ function CoachTrainings() {
             training={training}
             getAllTrainings={getAllTrainings}
           />
-          // <div key={training._id}>
-          //   <h4>{training.name}</h4>
-          //   <p>{training.description}</p>
-          // </div>
         );
       })}
     </div>

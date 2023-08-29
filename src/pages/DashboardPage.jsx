@@ -11,7 +11,7 @@ function DashboardPage() {
       <h2>Dashboard</h2>
       <p>{user.role}</p>
 
-      {user.role === "coach" && <CoachTrainings />}
+      {user.role === "coach" && <CoachTrainings coachId={user._id} />}
     </>
   );
 }
