@@ -3,11 +3,12 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 // import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
-  console.log("user in OneTraining card", user.role);
+  const [bookingMessage, setBookingMessage] = useState("Book Class");
+
   const oneTraining = props.training;
   const {
     name,
@@ -36,8 +37,17 @@ function OneTrainingCard(props) {
     };
     myApi
       .post(`${API_URL}/api/bookings`, requestbody)
-      .then((res) => console.log("the booking is working", res))
+      .then(() => {
+        //myApi.patch(`${API_URL}/api/trainings/${oneTraining._id}`, {})
+        // as a consequence, we want to push this userId to the list of participants
+        // we can do oneTraining.participants.push(user._id) but it doesn't save to the db
+        // So we need a patch.
+        // How do we do a patch .push
+
+        setBookingMessage("Booked!");
+      })
       .catch((e) => console.log(e));
+
     // the training is oneTraining
     // the coach is oneTraining.coach --> we just have the id
     // the user is user._id
@@ -77,7 +87,7 @@ function OneTrainingCard(props) {
         ) : (
           <div className="student-actions">
             <button>See Class Details</button>
-            <button onClick={handleBooking}>Book Class</button>
+            <button onClick={handleBooking}>{bookingMessage}</button>
           </div>
         )}
       </div>
