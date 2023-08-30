@@ -8,8 +8,11 @@ import { useContext, useState } from "react";
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
   const [bookingMessage, setBookingMessage] = useState("Book Class");
+  const [disabledButton, setDisabledButton] = useState(false);
 
   const oneTraining = props.training;
+  const isBooked = props.isBooked;
+
   const {
     name,
     description,
@@ -40,23 +43,9 @@ function OneTrainingCard(props) {
       .post(`${API_URL}/api/bookings`, requestbody)
       .then(() => {
         setBookingMessage("Booked!");
+        // setDisabledButton(false);
       })
       .catch((e) => console.log(e));
-    // =================================================================================================
-    // Update the "participants" key of a training when someone book it
-    // const updatedTraining = {
-    //   ...oneTraining,
-    //   participants: [...participants, user._id],
-    // };
-    // for (const key in updatedTraining) {
-    //   if (updatedTraining[key] === "") {
-    //     updatedTraining[key] = undefined;
-    //   }
-    // }
-    // myApi
-    //   .patch(`${API_URL}/api/trainings/${oneTraining._id}`, updatedTraining)
-    //   .then((res) => console.log("we added a new participant", res.data))
-    //   .catch((e) => console.log(e));
 
     // // the training is oneTraining
     // // the coach is oneTraining.coach --> we just have the id
@@ -98,7 +87,9 @@ function OneTrainingCard(props) {
         ) : (
           <div className="student-actions">
             <button>See Class Details</button>
-            <button onClick={handleBooking}>{bookingMessage}</button>
+            <button onClick={handleBooking} disabled={isBooked}>
+              {bookingMessage}
+            </button>
           </div>
         )}
       </div>
