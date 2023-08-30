@@ -18,7 +18,7 @@ function DashboardPage() {
         <ClientDashboard />
       )}
     </>
-  );
+  // );
 }
 
 export default DashboardPage;
