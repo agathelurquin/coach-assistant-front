@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
 import CoachTrainings from "../components/CoachTrainings";
+import ClientDashboard from "../components/ClientDashboard";
 
 function DashboardPage() {
   const { user } = useContext(UserContext);
@@ -11,9 +12,13 @@ function DashboardPage() {
       <h2>Dashboard</h2>
       <p>{user.role}</p>
 
-      {user.role === "coach" && <CoachTrainings />}
+      {user.role === "coach" ? (
+        <CoachTrainings coachId={user._id} />
+      ) : (
+        <ClientDashboard />
+      )}
     </>
-  );
+  // );
 }
 
 export default DashboardPage;

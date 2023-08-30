@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/AuthContext";
 import myApi from "../api/service";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -29,6 +30,7 @@ function TrainingForm(props) {
   const idToEdit = props.oneTraining;
   const submitAction = props.submitAction;
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   // submit for the create route
   const handleSubmit = (e) => {
@@ -41,6 +43,7 @@ function TrainingForm(props) {
       .then(() => {
         setTraining({ ...defaultTrainingValues, coach: user._id });
         setSubmitting(false);
+        navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };
@@ -79,6 +82,7 @@ function TrainingForm(props) {
       .then(() => {
         setTraining({ ...training, coach: user._id });
         setSubmitting(false);
+        navigate("/dashboard");
       })
       .catch((e) => console.log(e));
   };
@@ -111,7 +115,6 @@ function TrainingForm(props) {
           <input
             type="text"
             name="name"
-            placeholder=""
             value={training.name}
             onChange={handleChange}
             disabled={submitting}

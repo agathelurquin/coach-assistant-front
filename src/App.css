@@ -18,7 +18,8 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.navbar {
+.loggedin-nav,
+.not-loggedin-nav {
   display: flex;
   justify-content: space-around;
   gap: 15px;

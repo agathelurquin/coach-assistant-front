@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
 
 function Navbar() {
-  const { authenticateUser } = useContext(UserContext);
+  const { authenticateUser, isLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
   function handleLogout() {
     localStorage.removeItem("authToken");
@@ -13,20 +13,36 @@ function Navbar() {
   return (
     <>
       <div className="navbar">
-        <Link to="/">
-          <img
-            src="src/assets/img/default_avatar.png"
-            className="logo-navbar"
-            alt="home-logo"
-          />
-        </Link>
-        <Link to="/signup">Signup</Link>
-        <Link to="/login">Log In</Link>
-        <Link to="/dashboard">Dashboard</Link>
+        {isLoggedIn ? (
+          <div className="loggedin-nav">
+            <Link to="/">
+              <img
+                src="src/assets/img/default_avatar.png"
+                className="logo-navbar"
+                alt="home-logo"
+              />
+            </Link>
+            {/* <Link to="/signup">Signup</Link>
+            <Link to="/login">Log In</Link> */}
+            <Link to="/dashboard">Dashboard</Link>
 
-        <Link to="/" onClick={handleLogout}>
-          Signout
-        </Link>
+            <Link to="/" onClick={handleLogout}>
+              Signout
+            </Link>
+          </div>
+        ) : (
+          <div className="not-loggedin-nav">
+            <Link to="/">
+              <img
+                src="src/assets/img/default_avatar.png"
+                className="logo-navbar"
+                alt="home-logo"
+              />
+            </Link>
+            <Link to="/signup">Signup</Link>
+            <Link to="/login">Log In</Link>
+          </div>
+        )}
       </div>
     </>
   );
