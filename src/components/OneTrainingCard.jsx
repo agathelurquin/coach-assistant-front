@@ -42,12 +42,28 @@ function OneTrainingCard(props) {
         setBookingMessage("Booked!");
       })
       .catch((e) => console.log(e));
+    // =================================================================================================
+    // Update the "participants" key of a training when someone book it
+    // const updatedTraining = {
+    //   ...oneTraining,
+    //   participants: [...participants, user._id],
+    // };
+    // for (const key in updatedTraining) {
+    //   if (updatedTraining[key] === "") {
+    //     updatedTraining[key] = undefined;
+    //   }
+    // }
+    // myApi
+    //   .patch(`${API_URL}/api/trainings/${oneTraining._id}`, updatedTraining)
+    //   .then((res) => console.log("we added a new participant", res.data))
+    //   .catch((e) => console.log(e));
 
-    // the training is oneTraining
-    // the coach is oneTraining.coach --> we just have the id
-    // the user is user._id
-    // now we need to .post(booking) et .patch(training) to add the user to the participants
+    // // the training is oneTraining
+    // // the coach is oneTraining.coach --> we just have the id
+    // // the user is user._id
+    // // now we need to .post(booking) et .patch(training) to add the user to the participants
     console.log("the student wants to book this", oneTraining);
+    // =================================================================================================
   };
 
   return (

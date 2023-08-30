@@ -56,6 +56,7 @@ function CoachTrainings(props) {
         return (
           <OneBookingCard
             key={booking._id}
+            oneTraining={booking.training}
             oneBooking={booking}
             getAllBookings={getBookedClasses}
           />
