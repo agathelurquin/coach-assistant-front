@@ -2,7 +2,7 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 
 import { UserContext } from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 function OneBookingCard(props) {
   const { user } = useContext(UserContext);
@@ -24,7 +24,6 @@ function OneBookingCard(props) {
   const handleConfirmBooking = () => {
     console.log("the training we are receiving as a props: ", props);
     const updatedTraining = {
-      ...oneTraining,
       participants: [...oneTraining.participants, oneBooking.client],
     };
     for (const key in updatedTraining) {
@@ -47,6 +46,11 @@ function OneBookingCard(props) {
       <div className="booking-card-info">
         <p>{oneBooking.training.name}</p>
         <p>{oneBooking.training.trainingDate}</p>
+        <p>
+          Available Spots:{" "}
+          {oneBooking.training.availableSpots -
+            oneBooking.training.participants.length}
+        </p>
         <p>Status: {oneBooking.status}</p>
         {user.role === "student" ? (
           <button onClick={handleCancel}>Cancel Booking</button>
