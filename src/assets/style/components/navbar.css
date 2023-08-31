@@ -13,7 +13,7 @@
   width: 100%;
   top: 0;
   align-items: center;
-  padding: 0.8em 2rem;
+  padding: 1em 2rem;
 }
 .logo-navbar {
   width: 2em;
@@ -72,10 +72,11 @@
     cursor: default;
   }
 
-  button:focus,
-  button:focus-visible {
+  .navbar-mobile-toggle:focus,
+  .navbar-mobile-toggle:focus-visible {
     outline: none;
   }
+
   .nav-links {
     border-radius: 0 0 0 20px;
     display: flex;

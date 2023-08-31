@@ -1,0 +1,11 @@
+.list-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.training-card {
+  border-radius: 20px;
+  background-color: #15171d;
+  padding: 2em;
+}

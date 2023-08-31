@@ -11,12 +11,14 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
+    console.log("Toggle function called");
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   useEffect(() => {
+    console.log("useEffect executed");
     const closeMobileMenu = () => {
-      setIsMobileMenuOpen(false);
+      setIsMobileMenuOpen(true);
     };
     window.addEventListener("resize", closeMobileMenu);
     return () => {
@@ -41,7 +43,7 @@ function Navbar() {
           />
         </Link>
       </div>
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <div className={`nav-links ${isMobileMenuOpen ? "open" : ""}`}>
           <ul>
             <li>
@@ -60,11 +62,19 @@ function Navbar() {
             </li>
           </ul>
         </div>
+      ) : (
+        <div className={`nav-links ${isMobileMenuOpen ? "open" : ""}`}>
+          <ul>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/login">Log In</Link>{" "}
+            </li>
+          </ul>
+        </div>
       )}
-      <button
-        className="navbar-mobile-toggle hidden"
-        onClick={toggleMobileMenu}
-      >
+      <button className="navbar-mobile-toggle " onClick={toggleMobileMenu}>
         <FontAwesomeIcon icon={faBars} />
       </button>
     </div>
