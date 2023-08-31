@@ -87,8 +87,15 @@ function OneTrainingCard(props) {
         ) : (
           <div className="student-actions">
             <button>See Class Details</button>
-            <button onClick={handleBooking} disabled={isBooked}>
-              {bookingMessage}
+            <button
+              onClick={handleBooking}
+              disabled={isBooked || oneTraining.booked}
+            >
+              {oneTraining.booked
+                ? "Full"
+                : isBooked
+                ? "Already Booked"
+                : bookingMessage}
             </button>
           </div>
         )}
