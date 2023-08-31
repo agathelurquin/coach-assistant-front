@@ -3,15 +3,15 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 // import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
   const [bookingMessage, setBookingMessage] = useState("Book Class");
-  const [disabledButton, setDisabledButton] = useState(false);
+  // const [disabledButton, setDisabledButton] = useState(false);
 
   const oneTraining = props.training;
-  const isBooked = props.isBooked;
+  let isBooked = props.isBooked;
 
   const {
     name,
@@ -32,17 +32,26 @@ function OneTrainingCard(props) {
       .then(() => props.getAllTrainings())
       .catch((e) => console.log(e));
   };
+  useEffect(() => {
+    if (!isBooked) {
+      setBookingMessage("Book");
+    }
+  }, [isBooked]);
 
   const handleBooking = () => {
     const requestbody = {
       training: oneTraining._id,
       client: user._id,
       coach: oneTraining.coach,
+      status: "pending",
     };
     myApi
       .post(`${API_URL}/api/bookings`, requestbody)
       .then(() => {
         setBookingMessage("Booked!");
+        isBooked = true;
+        props.getClientBookings();
+        props.getAllTrainings();
         // setDisabledButton(false);
       })
       .catch((e) => console.log(e));
@@ -94,7 +103,7 @@ function OneTrainingCard(props) {
               {oneTraining.booked
                 ? "Full"
                 : isBooked
-                ? "Already Booked"
+                ? "Requested"
                 : bookingMessage}
             </button>
           </div>

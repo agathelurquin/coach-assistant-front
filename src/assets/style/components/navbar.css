@@ -1,0 +1,13 @@
+.loggedin-nav,
+.not-loggedin-nav {
+  position: fixed;
+  /* width: 100%; */
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 2em 0;
+}
+.logo-navbar {
+  width: 30px;
+}
