@@ -22,12 +22,6 @@ function OneBookingCard(props) {
 
   const resetTrainingAfterCancel = () => {
     if (oneBooking.status === "active") {
-      // we need to first do oneTraining.participants = [and we remove the participant]
-      // then do the line here setting the participant to the variable we just changed updatedTraining = {participants: updatedParticipants}
-      // But let's first check how we handle the available spots and booked keys
-      // Just checked, in the update route we automatically set the values of booked and available spots don't get modified
-      // In the future we can add a field "remainingSpots", that automatically calculates availableSpots - participants.length
-
       console.log("adding a step to update the training");
       console.log("oneTraining.participants", oneTraining.participants);
       console.log(
@@ -63,6 +57,11 @@ function OneBookingCard(props) {
     myApi
       .patch(`${API_URL}/api/bookings/${oneBooking._id}`, requestBody)
       .then((res) => {
+        setUpdateBookingMessage("Cancelled");
+        setTimeout(() => {
+          props.getClientBookings();
+          props.getAllTrainings();
+        }, 3000);
         console.log("booking is now cancelledConfirmed", res);
         console.log(
           "training that doesn't need to change because the booking was never accepted in the first place",

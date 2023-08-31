@@ -3,7 +3,7 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 // import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
@@ -32,6 +32,11 @@ function OneTrainingCard(props) {
       .then(() => props.getAllTrainings())
       .catch((e) => console.log(e));
   };
+  useEffect(() => {
+    if (!isBooked) {
+      setBookingMessage("Book");
+    }
+  }, [isBooked]);
 
   const handleBooking = () => {
     const requestbody = {

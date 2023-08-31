@@ -37,7 +37,7 @@ function ClientDashboard() {
     getAllTrainings();
     getClientBookings();
   }, []);
-
+  console.log(clientBookings);
   return (
     <div className="client-dashboard">
       <h2>Hi Client</h2>
@@ -72,7 +72,14 @@ function ClientDashboard() {
       })}
       <h3>YOUR CLASSES </h3>
       {clientBookings.map((booking) => {
-        return <OneBookingCard oneBooking={booking} key={booking._id} />;
+        return (
+          <OneBookingCard
+            oneBooking={booking}
+            key={booking._id}
+            getClientBookings={getClientBookings}
+            getAllTrainings={getAllTrainings}
+          />
+        );
       })}
     </div>
   );
