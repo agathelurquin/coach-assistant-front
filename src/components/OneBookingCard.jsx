@@ -10,6 +10,14 @@ function OneBookingCard(props) {
 
   const oneBooking = props.oneBooking;
 
+  const updateModel = (model) => {
+    for (const key in model) {
+      if (model[key] === "") {
+        model[key] = undefined;
+      }
+    }
+  };
+
   const handleCancel = () => {
     const requestBody = { ...oneBooking, status: "cancelled" };
     console.log("after the setbooking:", oneBooking);
@@ -26,20 +34,23 @@ function OneBookingCard(props) {
     const updatedTraining = {
       participants: [...oneTraining.participants, oneBooking.client],
     };
-    for (const key in updatedTraining) {
-      if (updatedTraining[key] === "") {
-        updatedTraining[key] = undefined;
-      }
-    }
+
+    updateModel(updatedTraining);
+
     myApi
       .patch(`${API_URL}/api/trainings/${oneTraining._id}`, updatedTraining)
       .then((res) => console.log("we added a new participant", res.data))
       .catch((e) => console.log(e));
 
-    // the training is oneTraining
-    // the coach is oneTraining.coach --> we just have the id
-    // the user is user._id
-    // now we need to .post(booking) et .patch(training) to add the user to the participants
+    const updatedBooking = {
+      status: "active",
+    };
+
+    updateModel(updatedBooking);
+    myApi
+      .patch(`${API_URL}/api/bookings/${oneBooking._id}`, updatedBooking)
+      .then((res) => console.log("we updated the booking status", res.data))
+      .catch((e) => console.log(e));
   };
   return (
     <div className="booking-card">

@@ -10,6 +10,11 @@ function CoachTrainings(props) {
   console.log("our coach Id is: ", coachId);
   const [coachTrainings, setCoachTrainings] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
+  const [pendingBookings, setPendingBookings] = useState([]);
+  const [activeBookings, setActiveBookings] = useState([]);
+
+  const pendings = [];
+  const actives = [];
 
   useEffect(() => {
     getAllTrainings();
@@ -31,13 +36,24 @@ function CoachTrainings(props) {
       .get(`${API_URL}/api/bookings/coach`)
       .then((res) => {
         setCoachBookings(res.data);
+
         console.log("response", res.data, "stored", coachBookings);
+        console.log("are coach trainings updated", coachBookings);
+        res.data.forEach((booking) => {
+          console.log("working");
+          if (booking.status === "active") {
+            console.log("active", booking);
+            actives.push(booking);
+          } else if (booking.status === "pending") {
+            pendings.push(booking);
+            console.log("pending", booking);
+          }
+        });
+        setPendingBookings([...pendings]);
+        setActiveBookings([...actives]);
       })
       .catch((e) => console.log(e));
-    //get /bookings/coaches/trainings/coaches/:coachId
-    // find
   }
-
   return (
     <div className="dashboard-action">
       <h3>My Trainings</h3>
@@ -51,17 +67,45 @@ function CoachTrainings(props) {
           />
         );
       })}
-      <h3>Classes Booked:</h3>
-      {coachBookings.map((booking) => {
-        return (
-          <OneBookingCard
-            key={booking._id}
-            oneTraining={booking.training}
-            oneBooking={booking}
-            getAllBookings={getBookedClasses}
-          />
-        );
-      })}
+      <div className="booking-subsection">
+        <h3>Classes Booked:</h3>
+        {coachBookings.map((booking) => {
+          return (
+            <OneBookingCard
+              key={booking._id}
+              oneTraining={booking.training}
+              oneBooking={booking}
+              getAllBookings={getBookedClasses}
+            />
+          );
+        })}
+      </div>
+      <div className="booking-subsection">
+        <h3>Classes active:</h3>
+        {activeBookings.map((booking) => {
+          return (
+            <OneBookingCard
+              key={booking._id}
+              oneTraining={booking.training}
+              oneBooking={booking}
+              getAllBookings={getBookedClasses}
+            />
+          );
+        })}
+      </div>
+      <div className="booking-subsection">
+        <h3>Classes Pending:</h3>
+        {pendingBookings.map((booking) => {
+          return (
+            <OneBookingCard
+              key={booking._id}
+              oneTraining={booking.training}
+              oneBooking={booking}
+              getAllBookings={getBookedClasses}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

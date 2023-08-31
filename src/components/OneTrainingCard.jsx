@@ -8,10 +8,10 @@ import { useContext, useState } from "react";
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
   const [bookingMessage, setBookingMessage] = useState("Book Class");
-  const [disabledButton, setDisabledButton] = useState(false);
+  // const [disabledButton, setDisabledButton] = useState(false);
 
   const oneTraining = props.training;
-  const isBooked = props.isBooked;
+  let isBooked = props.isBooked;
 
   const {
     name,
@@ -38,11 +38,15 @@ function OneTrainingCard(props) {
       training: oneTraining._id,
       client: user._id,
       coach: oneTraining.coach,
+      status: "pending",
     };
     myApi
       .post(`${API_URL}/api/bookings`, requestbody)
       .then(() => {
         setBookingMessage("Booked!");
+        isBooked = true;
+        props.getClientBookings();
+        props.getAllTrainings();
         // setDisabledButton(false);
       })
       .catch((e) => console.log(e));
