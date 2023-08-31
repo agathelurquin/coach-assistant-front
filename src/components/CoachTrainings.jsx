@@ -10,11 +10,19 @@ function CoachTrainings(props) {
   console.log("our coach Id is: ", coachId);
   const [coachTrainings, setCoachTrainings] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
+  const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
+
   const [pendingBookings, setPendingBookings] = useState([]);
   const [activeBookings, setActiveBookings] = useState([]);
+  const [cancelRequestedBookings, setCancelRequestedBookings] = useState([]);
 
   const pendings = [];
   const actives = [];
+  const cancelRequest = [];
+
+  useEffect(() => {
+    setAllTrainingsBooked(coachBookings.map((booking) => booking.training._id));
+  }, [coachBookings]);
 
   useEffect(() => {
     getAllTrainings();
@@ -55,10 +63,18 @@ function CoachTrainings(props) {
               booking.training.name,
               booking._id
             );
+          } else if (booking.status === "cancelRequested") {
+            cancelRequest.push(booking);
+            console.log(
+              "adding a cancelRequested booking",
+              booking.training.name,
+              booking._id
+            );
           }
         });
         setPendingBookings([...pendings]);
         setActiveBookings([...actives]);
+        setCancelRequestedBookings([...cancelRequest]);
       })
       .catch((e) => console.log(e));
   }
@@ -104,6 +120,19 @@ function CoachTrainings(props) {
       <div className="booking-subsection">
         <h3>Classes Pending:</h3>
         {pendingBookings.map((booking) => {
+          return (
+            <OneBookingCard
+              key={booking._id}
+              oneTraining={booking.training}
+              oneBooking={booking}
+              getAllBookings={getBookedClasses}
+            />
+          );
+        })}
+      </div>
+      <div className="booking-subsection">
+        <h3>Cancel Requests:</h3>
+        {cancelRequestedBookings.map((booking) => {
           return (
             <OneBookingCard
               key={booking._id}
