@@ -34,9 +34,6 @@ function ClientDashboard() {
     getAllTrainings();
     getClientBookings();
   }, []);
-  //=====================================================================
-  // I just removed client bookings ffrom depedencies
-  //=====================================================================
 
   return (
     <div className="client-dashboard">

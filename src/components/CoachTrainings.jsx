@@ -42,11 +42,19 @@ function CoachTrainings(props) {
         res.data.forEach((booking) => {
           console.log("working");
           if (booking.status === "active") {
-            console.log("active", booking);
+            console.log(
+              "adding an active booking",
+              booking.training.name,
+              booking._id
+            );
             actives.push(booking);
           } else if (booking.status === "pending") {
             pendings.push(booking);
-            console.log("pending", booking);
+            console.log(
+              "adding a pending booking",
+              booking.training.name,
+              booking._id
+            );
           }
         });
         setPendingBookings([...pendings]);
