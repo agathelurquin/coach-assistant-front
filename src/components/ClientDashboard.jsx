@@ -42,34 +42,35 @@ function ClientDashboard() {
     <div className="client-dashboard">
       <h2>Hi Client</h2>
       <h3>All Classes </h3>
-      {allTrainings.map((training) => {
-        if (allTrainingsBooked.includes(training._id)) {
-          console.log(
-            allTrainingsBooked.includes(training._id),
-            training._id,
-            training.name
+      <div className="list-card all-trainings-card">
+        {allTrainings.map((training) => {
+          if (allTrainingsBooked.includes(training._id)) {
+            console.log(
+              allTrainingsBooked.includes(training._id),
+              training._id,
+              training.name
+            );
+          }
+          return (
+            <div className="training-card" key={training._id}>
+              {allTrainingsBooked.includes(training._id) ? (
+                <OneTrainingCard
+                  training={training}
+                  isBooked={true}
+                  getClientBookings={() => {}}
+                />
+              ) : (
+                <OneTrainingCard
+                  training={training}
+                  isBooked={false}
+                  getClientBookings={getClientBookings}
+                  getAllTrainings={getAllTrainings}
+                />
+              )}
+            </div>
           );
-        }
-        return (
-          <div className="training-card" key={training._id}>
-            {allTrainingsBooked.includes(training._id) ? (
-              <OneTrainingCard
-                training={training}
-                isBooked={true}
-                getClientBookings={() => {}}
-              />
-            ) : (
-              <OneTrainingCard
-                training={training}
-                isBooked={false}
-                getClientBookings={getClientBookings}
-                getAllTrainings={getAllTrainings}
-              />
-            )}
-            ;
-          </div>
-        );
-      })}
+        })}
+      </div>
       <h3>YOUR CLASSES </h3>
       {clientBookings.map((booking) => {
         return (
