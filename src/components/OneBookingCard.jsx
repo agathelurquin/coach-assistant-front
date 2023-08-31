@@ -2,11 +2,13 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 
 import { UserContext } from "../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 function OneBookingCard(props) {
   const { user } = useContext(UserContext);
   const oneTraining = props.oneTraining;
+  const [updateBookingMessage, setUpdateBookingMessage] =
+    useState("Cancel Booking");
 
   const oneBooking = props.oneBooking;
 
@@ -79,6 +81,7 @@ function OneBookingCard(props) {
     // and then the coach, when he hits handle cancel, generated the patch request
     resetTrainingAfterCancel();
     cancelActiveBooking();
+    setUpdateBookingMessage("Cancelled");
   };
 
   const handleConfirmCancellation = () => {
@@ -138,7 +141,7 @@ function OneBookingCard(props) {
           </button>
         ) : (
           // so when it's active
-          <button onClick={handleCancel}>Cancel booking</button>
+          <button onClick={handleCancel}>{updateBookingMessage}</button>
         )}
       </div>
     </div>

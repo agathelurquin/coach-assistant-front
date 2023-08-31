@@ -8,7 +8,7 @@ import IsCoach from "./components/IsCoach";
 import DashboardPage from "./pages/DashboardPage";
 import NewTrainingPage from "./pages/NewTrainingPage";
 
-import "./App.css";
+import "./assets/style/App.css";
 import OneTrainingPage from "./pages/OneTrainingPage";
 
 function App() {

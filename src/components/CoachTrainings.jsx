@@ -10,7 +10,6 @@ function CoachTrainings(props) {
   console.log("our coach Id is: ", coachId);
   const [coachTrainings, setCoachTrainings] = useState([]);
   const [coachBookings, setCoachBookings] = useState([]);
-  const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
 
   const [pendingBookings, setPendingBookings] = useState([]);
   const [activeBookings, setActiveBookings] = useState([]);
@@ -20,9 +19,10 @@ function CoachTrainings(props) {
   const actives = [];
   const cancelRequest = [];
 
-  useEffect(() => {
-    setAllTrainingsBooked(coachBookings.map((booking) => booking.training._id));
-  }, [coachBookings]);
+  // const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
+  // useEffect(() => {
+  //   setAllTrainingsBooked(coachBookings.map((booking) => booking.training._id));
+  // }, [coachBookings]);
 
   useEffect(() => {
     getAllTrainings();

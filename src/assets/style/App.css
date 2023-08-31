@@ -1,3 +1,5 @@
+@import url("./components/navbar.css");
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -16,16 +18,6 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-.loggedin-nav,
-.not-loggedin-nav {
-  display: flex;
-  justify-content: space-around;
-  gap: 15px;
-}
-.logo-navbar {
-  width: 30px;
 }
 
 @keyframes logo-spin {

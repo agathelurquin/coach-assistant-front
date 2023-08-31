@@ -8,6 +8,9 @@ function ClientDashboard() {
   const [clientBookings, setClientBookings] = useState([]);
   const [allTrainings, setAllTrainings] = useState([]);
   const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
+  // const [updateBookingMessage, setUpdateBookingMessage] =
+  //   useState("Cancel Booking");
+
   function getAllTrainings() {
     myApi
       .get(`${API_URL}/api/trainings`)

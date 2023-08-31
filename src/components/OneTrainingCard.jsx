@@ -98,7 +98,7 @@ function OneTrainingCard(props) {
               {oneTraining.booked
                 ? "Full"
                 : isBooked
-                ? "Already Booked"
+                ? "Requested"
                 : bookingMessage}
             </button>
           </div>
