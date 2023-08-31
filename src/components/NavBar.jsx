@@ -23,6 +23,8 @@ function Navbar() {
       {/* <Link to="/signup">Signup</Link>
             <Link to="/login">Log In</Link> */}
       <Link to="/dashboard">Dashboard</Link>
+      <Link to="#">Explore</Link>
+      <Link to="#">My Activity</Link>
 
       <Link to="/" onClick={handleLogout}>
         Signout
