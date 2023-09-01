@@ -87,11 +87,13 @@ function CoachTrainings(props) {
         </Link>
 
         <CountBadge
+          className="badge"
           number={activeBookings.length}
           href="#new-bookings"
           message="New Bookings"
         />
         <CountBadge
+          className="badge"
           number={cancelRequestedBookings.length}
           href="#cancellations"
           message="Cancellations"
@@ -161,7 +163,7 @@ function CoachTrainings(props) {
         })}
       </div>
       <div className="booking-subsection list-container">
-        <h3 className="list-container-title">They Cancelled 😢:</h3>
+        <h3 className="list-container-title">They Cancelled 😢</h3>
         {cancelRequestedBookings.length === 0 && (
           <div className="empty-subsection">
             <p>Actually no, you&#x2019;re good! </p>

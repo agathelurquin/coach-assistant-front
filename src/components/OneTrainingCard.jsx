@@ -5,6 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 import { UserContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OneTrainingCard(props) {
@@ -68,14 +69,13 @@ function OneTrainingCard(props) {
 
   return (
     <div className="training-card">
-      <div className="card-info">
-        <img
-          src="src/assets/img/training-card-banner.jpg"
-          alt="training card banner"
-          className="training-banner"
-        />
+      <img
+        src="src/assets/img/training-card-banner.jpg"
+        alt="training card banner"
+        className="training-banner"
+      />
+      <div className="card-info ">
         <h3>{name}</h3>
-        <p>{description}</p>
         <p className="booking-card-date">
           <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
           {new Intl.DateTimeFormat("en-EN", {
@@ -85,10 +85,11 @@ function OneTrainingCard(props) {
         </p>
         <div className="div">
           <p>
-            location: {location}
+            <div>
+              <FontAwesomeIcon icon={faLocationDot} /> {location}
+            </div>
             workout: {activityType}
-            Activity: {type}
-            Available Spots: {availableSpots}
+            Spots left: {availableSpots}
           </p>
         </div>
       </div>

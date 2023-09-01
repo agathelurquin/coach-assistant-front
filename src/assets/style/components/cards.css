@@ -48,21 +48,37 @@
 
 .training-banner {
   width: 100%;
-  max-height: 10vh;
+  /* max-height: 10vh; */
+  background-position: center;
+  background-size: cover;
+  border-radius: 17px 17px 0 0;
+}
+
+.training-card .card-info {
+  text-align: left;
 }
 
 .action-buttons {
   display: flex;
   gap: 1rem;
+  width: 100%;
 }
 
 .action-buttons button {
-  width: 80%;
-  padding: 0.1rem;
+  /* width: 80%; */
+  /* padding: 0.1rem; */
   background-color: #3c3c3c;
   margin-top: 0.3rem;
   font-size: 0.8rem;
+  color: #5275f0;
 }
+.coach-actions button {
+  /* width: 80%; */
+  background-color: #3c3c3c;
+  margin-top: 0.3rem;
+  /* font-size: 0.8rem; */
+}
+
 /* SINGLE BOOKING CARD  */
 
 .booking-card {
