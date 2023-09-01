@@ -5,7 +5,7 @@ function OneTrainingPage() {
   const trainingToEdit = useParams().trainingId;
   console.log("trainingToEdit", trainingToEdit);
   return (
-    <div className="training-page">
+    <div className="page-content training-page">
       <h1>One Training Pageuh</h1>
       <TrainingForm oneTraining={trainingToEdit} submitAction="edit" />
     </div>

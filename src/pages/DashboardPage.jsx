@@ -8,16 +8,15 @@ function DashboardPage() {
 
   console.log("hereeee", useContext(UserContext));
   return (
-    <>
-      <h2>Dashboard</h2>
-      <p>{user.role}</p>
+    <div className="page-content">
+      <h2 className="page-title">Hey {user.name}</h2>
 
       {user.role === "coach" ? (
         <CoachTrainings coachId={user._id} />
       ) : (
         <ClientDashboard />
       )}
-    </>
+    </div>
   );
 }
 

@@ -40,48 +40,54 @@ function ClientDashboard() {
   console.log(clientBookings);
   return (
     <div className="client-dashboard">
-      <h2>Hi Client</h2>
-      <h3>All Classes </h3>
-      <div className="list-card all-trainings-card">
-        {allTrainings.map((training) => {
-          if (allTrainingsBooked.includes(training._id)) {
-            console.log(
-              allTrainingsBooked.includes(training._id),
-              training._id,
-              training.name
+      <div className="list-container">
+        <h3 className="list-container-title">YOUR CLASSES </h3>
+        <div className="list-card">
+          {clientBookings.map((booking) => {
+            return (
+              <OneBookingCard
+                oneBooking={booking}
+                key={booking._id}
+                getClientBookings={getClientBookings}
+                getAllTrainings={getAllTrainings}
+              />
             );
-          }
-          return (
-            <div className="training-card" key={training._id}>
-              {allTrainingsBooked.includes(training._id) ? (
-                <OneTrainingCard
-                  training={training}
-                  isBooked={true}
-                  getClientBookings={() => {}}
-                />
-              ) : (
-                <OneTrainingCard
-                  training={training}
-                  isBooked={false}
-                  getClientBookings={getClientBookings}
-                  getAllTrainings={getAllTrainings}
-                />
-              )}
-            </div>
-          );
-        })}
+          })}
+        </div>
       </div>
-      <h3>YOUR CLASSES </h3>
-      {clientBookings.map((booking) => {
-        return (
-          <OneBookingCard
-            oneBooking={booking}
-            key={booking._id}
-            getClientBookings={getClientBookings}
-            getAllTrainings={getAllTrainings}
-          />
-        );
-      })}
+
+      <div className="list-container">
+        <h3 className="list-container-title">All Classes </h3>
+        <div className="list-card all-trainings-card">
+          {allTrainings.map((training) => {
+            if (allTrainingsBooked.includes(training._id)) {
+              console.log(
+                allTrainingsBooked.includes(training._id),
+                training._id,
+                training.name
+              );
+            }
+            return (
+              <div className="training-card" key={training._id}>
+                {allTrainingsBooked.includes(training._id) ? (
+                  <OneTrainingCard
+                    training={training}
+                    isBooked={true}
+                    getClientBookings={() => {}}
+                  />
+                ) : (
+                  <OneTrainingCard
+                    training={training}
+                    isBooked={false}
+                    getClientBookings={getClientBookings}
+                    getAllTrainings={getAllTrainings}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

@@ -81,71 +81,78 @@ function SignupPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          id="name"
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password: </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          id="password"
-        />
-      </div>
-      <div>
-        <label htmlFor="role">You are:</label>
-        <select name="role" id="role" onChange={handleRoleSelect} value={role}>
-          {roles.map((role) => (
-            <option key={role.value} value={role.value}>
-              {role.label}
-            </option>
-          ))}
-          {/* <option value={role}>Student</option>
+    <div className="page-content">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            id="name"
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            id="email"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            id="password"
+          />
+        </div>
+        <div>
+          <label htmlFor="role">You are:</label>
+          <select
+            name="role"
+            id="role"
+            onChange={handleRoleSelect}
+            value={role}
+          >
+            {roles.map((role) => (
+              <option key={role.value} value={role.value}>
+                {role.label}
+              </option>
+            ))}
+            {/* <option value={role}>Student</option>
           <option value={role}>Coach</option> */}
-        </select>
-        {role === "coach" && (
-          <>
-            <div>
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                id="description"
-              />
-            </div>
-            <div>
-              <label htmlFor="activity">Activity</label>
-              <input
-                type="text"
-                value={activity}
-                onChange={(e) => setActivity(e.target.value)}
-                id="activity"
-              />
-            </div>
-          </>
-        )}
-      </div>
-      {error && <p>{error}</p>}
-      <button>Sign Up</button>
-    </form>
+          </select>
+          {role === "coach" && (
+            <>
+              <div>
+                <label htmlFor="description">Description</label>
+                <input
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  id="description"
+                />
+              </div>
+              <div>
+                <label htmlFor="activity">Activity</label>
+                <input
+                  type="text"
+                  value={activity}
+                  onChange={(e) => setActivity(e.target.value)}
+                  id="activity"
+                />
+              </div>
+            </>
+          )}
+        </div>
+        {error && <p>{error}</p>}
+        <button>Sign Up</button>
+      </form>
+    </div>
   );
 }
 

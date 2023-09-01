@@ -4,6 +4,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 import { UserContext } from "../context/AuthContext";
 import { useContext, useState } from "react";
 
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function OneBookingCard(props) {
   const { user } = useContext(UserContext);
   const oneTraining = props.oneTraining;
@@ -121,14 +124,21 @@ function OneBookingCard(props) {
   };
   return (
     <div className="booking-card">
+      <img src="src/assets/img/booking-image.jpg" alt="booking-image" />
       <div className="booking-card-info">
-        <p>{oneBooking.training.name}</p>
-        <p>{oneBooking.training.trainingDate}</p>
-        <p>
+        <p className="booking-card-name">{oneBooking.training.name}</p>
+        <p className="booking-card-date">
+          <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
+          {new Intl.DateTimeFormat("en-EN", {
+            dateStyle: "short",
+            timeStyle: "short",
+          }).format(new Date(oneBooking.training.trainingDate))}
+        </p>
+        {/* <p>
           Available Spots:{" "}
           {oneBooking.training.availableSpots -
             oneBooking.training.participants.length}
-        </p>
+        </p> */}
         <p>Status: {oneBooking.status}</p>
         {user.role === "student" ? (
           <button onClick={handleCancel}>Cancel Booking</button>

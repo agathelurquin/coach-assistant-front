@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/AuthContext";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faBars } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import ToggleButton from "@mui/material/ToggleButton";
 
 function Navbar() {
   const { authenticateUser, isLoggedIn } = useContext(UserContext);
@@ -18,7 +21,7 @@ function Navbar() {
   useEffect(() => {
     console.log("useEffect executed");
     const closeMobileMenu = () => {
-      setIsMobileMenuOpen(true);
+      setIsMobileMenuOpen(false);
     };
     window.addEventListener("resize", closeMobileMenu);
     return () => {
@@ -37,7 +40,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/">
           <img
-            src="src/assets/img/default_avatar.png"
+            src="src/assets/img/coach-assistant-logo.png"
             className="logo-navbar"
             alt="home-logo"
           />
@@ -74,8 +77,18 @@ function Navbar() {
           </ul>
         </div>
       )}
-      <button className="navbar-mobile-toggle " onClick={toggleMobileMenu}>
-        <FontAwesomeIcon icon={faBars} />
+      <button
+        className="navbar-mobile-toggle hidden"
+        onClick={toggleMobileMenu}
+      >
+        <ToggleButton
+          value="justify"
+          aria-label="justified"
+          disabled
+          className="menu-icon"
+        >
+          <FormatAlignJustifyIcon className="menu-icon" />
+        </ToggleButton>
       </button>
     </div>
   );

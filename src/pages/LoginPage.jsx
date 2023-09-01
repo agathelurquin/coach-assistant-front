@@ -33,7 +33,7 @@ function LoginPage() {
   }
 
   return (
-    <>
+    <div className="page-content">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
@@ -58,7 +58,7 @@ function LoginPage() {
         {error && <p>{error}</p>}
         <button>Login</button>
       </form>
-    </>
+    </div>
   );
 }
 

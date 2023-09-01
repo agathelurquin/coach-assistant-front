@@ -74,15 +74,16 @@ function OneTrainingCard(props) {
         ${new Intl.DateTimeFormat("en-EN", {
           dateStyle: "short",
           timeStyle: "short",
-        }).format(new Date(trainingDate))}
-        duration: ${duration}
-        location: ${location}
-        workout: ${activityType}
-        coaching type: ${type}
-        available spots: ${availableSpots}
-        participants: ${participants}
-        status: ${booked ? "booked" : "available"}
-      `}
+        }).format(new Date(trainingDate))}`}
+          <div className="div">
+            duration: ${duration}
+            location: ${location}
+            workout: ${activityType}
+            coaching type: ${type}
+            available spots: ${availableSpots}
+            participants: ${participants}
+            status: ${booked ? "booked" : "available"}
+          </div>
         </p>
       </div>
       <div className="card-actions">
