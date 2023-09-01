@@ -7,6 +7,7 @@ import IsLoggedIn from "./components/IsLoggedIn";
 import IsCoach from "./components/IsCoach";
 import DashboardPage from "./pages/DashboardPage";
 import NewTrainingPage from "./pages/NewTrainingPage";
+import TrainingList from "./pages/TrainingList";
 
 import "./assets/style/App.css";
 import OneTrainingPage from "./pages/OneTrainingPage";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<IsLoggedIn />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/explore" element={<TrainingList />} />
           <Route path="/trainings" element={<IsCoach />}>
             <Route path="/trainings" element={<NewTrainingPage />} />
             <Route

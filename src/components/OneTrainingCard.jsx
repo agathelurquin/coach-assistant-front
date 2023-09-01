@@ -12,10 +12,10 @@ function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
   const [bookingMessage, setBookingMessage] = useState("Book Class");
   // const [disabledButton, setDisabledButton] = useState(false);
+  const [avatar, setAvatar] = useState("");
 
   const oneTraining = props.training;
   let isBooked = props.isBooked;
-
   const {
     name,
     description,
@@ -29,6 +29,14 @@ function OneTrainingCard(props) {
     booked,
     image,
   } = oneTraining;
+
+  myApi
+    .get(`${API_URL}/api/users/${oneTraining.coach}`)
+    .then((res) => {
+      console.log(res.data);
+      setAvatar(res.data.avatar);
+    })
+    .catch((e) => console.log(e));
 
   const handleDelete = () => {
     myApi
@@ -71,23 +79,29 @@ function OneTrainingCard(props) {
   return (
     <div className="training-card">
       <img src={image} alt="training card banner" className="training-banner" />
-      <div className="card-info ">
-        <h3>{name}</h3>
-        <p className="booking-card-date">
-          <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
-          {new Intl.DateTimeFormat("en-EN", {
-            dateStyle: "short",
-            timeStyle: "short",
-          }).format(new Date(trainingDate))}
-        </p>
-        <div className="div">
-          <p>
-            <div>
-              <FontAwesomeIcon icon={faLocationDot} /> {location}
-            </div>
-            workout: {activityType}
-            Spots left: {availableSpots}
+
+      <div className="card-info subsection">
+        <img src={avatar} alt="coach-avatar" className="coach-avatar" />
+        <div className="info">
+          <h3>{name}</h3>
+          <p className="booking-card-date">
+            <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
+            {new Intl.DateTimeFormat("en-EN", {
+              dateStyle: "short",
+              timeStyle: "short",
+            }).format(new Date(trainingDate))}
           </p>
+          <div className="div">
+            <p>
+              <div>
+                <FontAwesomeIcon icon={faLocationDot} /> {location}
+              </div>
+              <div className="details">
+                <span>Workout: {activityType.toUpperCase()}</span>
+                <span>Spots left: {availableSpots}</span>
+              </div>
+            </p>
+          </div>
         </div>
       </div>
       <div className="card-actions">
