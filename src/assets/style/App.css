@@ -5,6 +5,14 @@
 
 :root {
   --main-bg-color: #3b61c8;
+  --ligth-blue: #5275f0;
+  --dark-blue: #0019fe;
+  --light-blue-border: #605ebe;
+  --extreme-gradiant: #fff;
+  --dark-bg-grey: #101010;
+  --medium-gb-grey: #1d1e21;
+  --lighter-gb-grey: #3c3c3c;
+  --main-light-fc: #ceced4;
 }
 
 * {

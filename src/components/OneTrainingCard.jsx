@@ -27,6 +27,7 @@ function OneTrainingCard(props) {
     availableSpots,
     participants,
     booked,
+    image,
   } = oneTraining;
 
   const handleDelete = () => {
@@ -69,11 +70,7 @@ function OneTrainingCard(props) {
 
   return (
     <div className="training-card">
-      <img
-        src="src/assets/img/training-card-banner.jpg"
-        alt="training card banner"
-        className="training-banner"
-      />
+      <img src={image} alt="training card banner" className="training-banner" />
       <div className="card-info ">
         <h3>{name}</h3>
         <p className="booking-card-date">

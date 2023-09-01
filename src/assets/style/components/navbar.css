@@ -22,7 +22,7 @@
     #000 -20%,
 
     #3244e0 41.48%,
-    #5275f0 83.59%
+    var(--ligth-blue) 83.59%
   );
 
   position: sticky;
@@ -105,11 +105,11 @@
     right: 0;
     background: linear-gradient(
       118deg,
-      #0019fe -60.67%,
-      #0019fe -40%,
+      var(--dark-blue) -60.67%,
+      var(--dark-blue) -40%,
 
-      #5275f0 41.48%,
-      #5275f0 83.59%
+      var(--ligth-blue) 41.48%,
+      var(--ligth-blue) 83.59%
     );
     width: 30%;
     z-index: 100;
