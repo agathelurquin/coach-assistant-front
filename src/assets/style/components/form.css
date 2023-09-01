@@ -1,0 +1,66 @@
+.signup-in-page {
+  justify-content: center;
+}
+
+.signup-in-form {
+  margin-top: 1rem;
+}
+.signup-page h2 {
+  background: linear-gradient(
+    118deg,
+    var(--dark-blue) -40.67%,
+    var(--ligth-blue) 41.48%,
+    #fff 83.59%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-field,
+select {
+  color: var(--main-light-fc);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  border-radius: 20px;
+  border: 1px var(--light-blue-border) solid;
+  background-color: rgb(56, 56, 60);
+  padding: 0.8rem;
+  margin: 1rem;
+  width: 90%;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Remove default arrow */
+  background-image: url(...);
+  /* Add custom arrow */
+}
+
+.role-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.role-input .role-input-select {
+  width: 70%;
+}
+
+.signup-in-button {
+  margin-top: 2rem;
+  width: 90%;
+  color: var(--main-light-fc);
+  border-radius: 20px;
+}
+
+.date-picker {
+  background-color: var(--ligth-blue);
+  opacity: 0.7;
+  color: white;
+  border-radius: 30px;
+}

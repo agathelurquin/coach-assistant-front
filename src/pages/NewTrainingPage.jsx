@@ -1,7 +1,11 @@
 import TrainingForm from "../components/TrainingForm";
 
 function NewTrainingPage() {
-  return <TrainingForm />;
+  return (
+    <div className="page-content">
+      <TrainingForm />
+    </div>
+  );
 }
 
 export default NewTrainingPage;

@@ -4,10 +4,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "./OneTrainingCard";
 import OneBookingCard from "./OneBookingCard";
 
-function ClientDashboard() {
+function ClientDashboard(props) {
   const [clientBookings, setClientBookings] = useState([]);
   const [allTrainings, setAllTrainings] = useState([]);
   const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
+  const avatar = props.avatar;
+  console.log(avatar);
   // const [updateBookingMessage, setUpdateBookingMessage] =
   //   useState("Cancel Booking");
 
@@ -40,48 +42,49 @@ function ClientDashboard() {
   console.log(clientBookings);
   return (
     <div className="client-dashboard">
-      <h2>Hi Client</h2>
-      <h3>All Classes </h3>
-      <div className="list-card all-trainings-card">
-        {allTrainings.map((training) => {
-          if (allTrainingsBooked.includes(training._id)) {
-            console.log(
-              allTrainingsBooked.includes(training._id),
-              training._id,
-              training.name
+      <div className="list-container">
+        <h3 className="list-container-title">YOUR CLASSES </h3>
+        <div className="list-card">
+          {clientBookings.map((booking) => {
+            return (
+              <OneBookingCard
+                oneBooking={booking}
+                key={booking._id}
+                getClientBookings={getClientBookings}
+                getAllTrainings={getAllTrainings}
+              />
             );
-          }
-          return (
-            <div className="training-card" key={training._id}>
-              {allTrainingsBooked.includes(training._id) ? (
-                <OneTrainingCard
-                  training={training}
-                  isBooked={true}
-                  getClientBookings={() => {}}
-                />
-              ) : (
-                <OneTrainingCard
-                  training={training}
-                  isBooked={false}
-                  getClientBookings={getClientBookings}
-                  getAllTrainings={getAllTrainings}
-                />
-              )}
-            </div>
-          );
-        })}
+          })}
+        </div>
       </div>
-      <h3>YOUR CLASSES </h3>
-      {clientBookings.map((booking) => {
-        return (
-          <OneBookingCard
-            oneBooking={booking}
-            key={booking._id}
-            getClientBookings={getClientBookings}
-            getAllTrainings={getAllTrainings}
-          />
-        );
-      })}
+
+      <div className="list-container">
+        <h3 className="list-container-title">FIND A WORKOUT </h3>
+        <div className="list-card all-trainings-card">
+          {allTrainings.map((training) => {
+            return (
+              <div className="training-card" key={training._id}>
+                {allTrainingsBooked.includes(training._id) ? (
+                  <OneTrainingCard
+                    avatar={avatar}
+                    training={training}
+                    isBooked={true}
+                    getClientBookings={() => {}}
+                  />
+                ) : (
+                  <OneTrainingCard
+                    avatar={avatar}
+                    training={training}
+                    isBooked={false}
+                    getClientBookings={getClientBookings}
+                    getAllTrainings={getAllTrainings}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

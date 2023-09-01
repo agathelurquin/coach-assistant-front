@@ -1,11 +1,140 @@
+.page-content {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  text-align: left;
+  margin: 1rem;
+  background: linear-gradient(
+    118deg,
+    var(--dark-blue) -40.67%,
+    var(--ligth-blue) 41.48%,
+    #fff 83.59%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.list-container {
+  background-color: var(--dark-bg-grey);
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 1rem 0;
+}
+
 .list-card {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1rem;
+}
+
+.list-container-title {
+  text-align: left;
+  margin: 1rem;
 }
 
 .training-card {
-  border-radius: 20px;
-  background-color: #15171d;
-  padding: 2em;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--medium-gb-grey);
+  /* box-shadow: rgb(33, 33, 33) 1.95px 1.95px 2.6px; */
+}
+
+/* SINGLE TRAINING CARD */
+
+.training-banner {
+  width: 100%;
+  /* max-height: 10vh; */
+  background-position: center;
+  background-size: cover;
+  border-radius: 17px 17px 0 0;
+}
+
+.training-card .card-info {
+  text-align: left;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.action-buttons button {
+  /* width: 80%; */
+  /* padding: 0.1rem; */
+  background-color: var(--lighter-gb-grey);
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--ligth-blue);
+}
+.coach-actions button {
+  /* width: 80%; */
+  background-color: var(--lighter-gb-grey);
+  margin-top: 0.3rem;
+  /* font-size: 0.8rem; */
+}
+
+/* SINGLE BOOKING CARD  */
+
+.booking-card {
+  border-radius: 4rem;
+  background: var(--medium-gb-grey);
+  /* box-shadow: rgba(45, 45, 45, 0.491) 5px 3px 8px 0px; */
+  padding: 0.5rem 0.3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.booking-card img {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+.booking-card-name {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.booking-card-info {
+  width: 60%;
+  text-align: left;
+  font-size: 0.5rem;
+}
+
+.calendar-icon {
+  margin-right: 0.3rem;
+}
+
+.booking-card button {
+  color: var(--ligth-blue);
+  width: 80%;
+  padding: 0.2rem 0;
+  background-color: var(--lighter-gb-grey);
+  margin-top: 0.3rem;
+}
+
+.empty-subsection {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.action-tags {
+  display: flex;
+  justify-content: space-around;
+}
+.tag-button {
+  background-color: var(--ligth-blue);
+  color: #fff;
+  border-radius: 30px;
+  font-size: 0.5rem;
 }

@@ -103,38 +103,66 @@ function TrainingForm(props) {
   }, []);
 
   return (
-    <div className="training-form">
-      <h3>
+    <div className="training-form signup-in-page page-content">
+      <h2>
         {submitAction === "edit"
           ? "Update your training info"
           : "Add a new training slot"}
-      </h3>
-      <form onSubmit={submitAction === "edit" ? handleEdit : handleSubmit}>
-        <div>
-          <label htmlFor="name">Training Name: </label>
+      </h2>
+      <form
+        onSubmit={submitAction === "edit" ? handleEdit : handleSubmit}
+        className="signup-in-form"
+      >
+        <div className="form-input">
+          <label className="input-label" htmlFor="name"></label>
           <input
+            className="form-field"
             type="text"
             name="name"
-            value={training.name}
+            value={training.name || " Training Name"}
             onChange={handleChange}
             disabled={submitting}
           />
         </div>
-        <div>
-          <label htmlFor="description">Description: </label>
+        <div className="form-input">
+          <label className="input-label" htmlFor="description"></label>
           <input
+            className="form-field"
             type="text"
             name="description"
-            value={training.description}
+            value={training.description || "Description"}
             onChange={handleChange}
             disabled={submitting}
           />
         </div>
-        <div>
-          <label htmlFor="trainingDate">Date of the training: </label>
+        <div className="form-input">
+          <label className="input-label" htmlFor="location"></label>
+          <input
+            className="form-field"
+            type="text"
+            name="location"
+            value={training.location || "Location"}
+            onChange={handleChange}
+            disabled={submitting}
+          />
+        </div>
+        <div className="form-input">
+          <label className="input-label" htmlFor="price"></label>
+          <input
+            className="form-field"
+            type="text"
+            name="price"
+            value={training.price || "Price"}
+            onChange={handleChange}
+            disabled={submitting}
+          />
+        </div>
+        <div className="form-input">
+          <label className="input-label" htmlFor="trainingDate"></label>
           <DateTimePicker
+            className="date-picker"
             name="trainingDate"
-            value={training.trainingDate}
+            value={training.trainingDate || "Date of the training"}
             // inputFormat=""
             onChange={(value) =>
               setTraining((training) => ({ ...training, trainingDate: value }))
@@ -143,54 +171,36 @@ function TrainingForm(props) {
             label="Workout Date and Time"
           />
         </div>
-        <div>
-          <label htmlFor="duration">Duration of the training: </label>
+        <div className="form-input">
+          <label className="input-label" htmlFor="duration"></label>
           <input
+            className="form-field"
             type="time"
             name="duration"
-            value={training.duration}
-            onChange={handleChange}
-            disabled={submitting}
-          />
-        </div>
-        <div>
-          <label htmlFor="location">Location: </label>
-          <input
-            type="text"
-            name="location"
-            value={training.location}
-            onChange={handleChange}
-            disabled={submitting}
-          />
-        </div>
-        <div>
-          <label htmlFor="price">Price </label>
-          <input
-            type="text"
-            name="price"
-            value={training.price}
+            value={training.duration || "Duration of the training"}
             onChange={handleChange}
             disabled={submitting}
           />
         </div>
         {/* CONFIG LES ACTIVITES */}
-        <div>
-          <label htmlFor="activityType">activity:</label>
+        <div className="form-input">
+          <label className="input-label" htmlFor="activityType"></label>
           <input
+            className="form-field"
             type="text"
             name="activityType"
-            value={training.activityType}
+            value={training.activityType || " activity"}
             onChange={handleChange}
             disabled={submitting}
           />
         </div>
-        <div>
-          <label htmlFor="type">Training type:</label>
+        <div className="form-input">
+          <label className="input-label" htmlFor="type"></label>
           <select
             name="type"
             id="type"
             onChange={handleChange}
-            value={training.type}
+            value={training.type || "Training type"}
           >
             {trainingTypeOptions.map((option) => (
               <option key={option} value={option}>
@@ -199,19 +209,21 @@ function TrainingForm(props) {
             ))}
           </select>
         </div>
-        <div>
-          <label htmlFor="availableSpots">Available Spots:</label>
+        <div className="form-input role-input">
+          <label className="input-label" htmlFor="availableSpots">
+            Available Spots
+          </label>
           <input
+            className="form-field"
             type="number"
             name="availableSpots"
-            value={training.availableSpots}
+            value={training.availableSpots || " Available Spots"}
             onChange={handleChange}
             disabled={submitting}
           />
         </div>
 
-        <button>
-          {" "}
+        <button className="signup-in-button">
           {submitAction === "edit" ? "Edit Training" : "Add Training"}
         </button>
       </form>

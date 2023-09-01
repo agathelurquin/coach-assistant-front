@@ -1,9 +1,19 @@
 @import url("./components/navbar.css");
 @import url("./pages/home.css");
 @import url("./components/cards.css");
+@import url("./components/form.css");
+@import url("./pages/dashboard.css");
 
 :root {
   --main-bg-color: #3b61c8;
+  --ligth-blue: #5275f0;
+  --dark-blue: #0019fe;
+  --light-blue-border: #605ebe;
+  --extreme-gradiant: #fff;
+  --dark-bg-grey: #101010;
+  --medium-gb-grey: #1d1e21;
+  --lighter-gb-grey: #3c3c3c;
+  --main-light-fc: #ceced4;
 }
 
 * {
@@ -28,6 +38,10 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.badge {
+  z-index: -1;
 }
 
 @keyframes logo-spin {
