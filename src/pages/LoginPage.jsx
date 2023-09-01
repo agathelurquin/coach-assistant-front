@@ -33,31 +33,39 @@ function LoginPage() {
   }
 
   return (
-    <div className="page-content">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            id="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            id="password"
-          />
-        </div>
-        {error && <p>{error}</p>}
-        <button>Login</button>
-      </form>
+    <div className="signup-in-page">
+      <div className="page-content">
+        <h2>LOG IN</h2>
+
+        <form onSubmit={handleSubmit} className="signup-in-form">
+          <div className="form-input">
+            <label className="form-label" htmlFor="email"></label>
+            <input
+              className="form-field"
+              placeholder="Email"
+              type="text"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+            />
+          </div>
+          <div className="form-input">
+            <label className="form-label" htmlFor="password"></label>
+            <input
+              className="form-field"
+              placeholder="Password 🤫"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+            />
+          </div>
+          {error && <p>{error}</p>}
+          <button className="signup-in-button">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -84,10 +84,10 @@ function SignupPage() {
   }
 
   return (
-    <div className="signup-page">
+    <div className="signup-in-page">
       <div className="page-content">
         <h2>SIGN UP</h2>
-        <form onSubmit={handleSubmit} className="signup-form">
+        <form onSubmit={handleSubmit} className="signup-in-form">
           <div className="form-input">
             <label htmlFor="name" className="input-label"></label>
             <input
@@ -171,7 +171,7 @@ function SignupPage() {
             </div>
           </div>
           {error && <p>{error}</p>}
-          <button className="signup-button">Sign Up</button>
+          <button className="signup-in-button">Sign Up</button>
         </form>
       </div>
     </div>

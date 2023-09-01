@@ -1,8 +1,8 @@
-.signup-page {
+.signup-in-page {
   justify-content: center;
 }
 
-.signup-form {
+.signup-in-form {
   margin-top: 1rem;
 }
 .signup-page h2 {
@@ -50,7 +50,7 @@ select {
   width: 70%;
 }
 
-.signup-button {
+.signup-in-button {
   margin-top: 2rem;
   width: 90%;
 
