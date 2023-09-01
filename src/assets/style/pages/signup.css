@@ -1,0 +1,58 @@
+.signup-page {
+  justify-content: center;
+}
+
+.signup-form {
+  margin-top: 1rem;
+}
+.signup-page h2 {
+  background: linear-gradient(
+    118deg,
+    #0019fe -40.67%,
+    #5275f0 41.48%,
+    #fff 83.59%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-field,
+select {
+  color: #ceced4;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  border-radius: 20px;
+  border: 1px #605ebe solid;
+  background-color: rgb(56, 56, 60);
+  padding: 0.8rem;
+  margin: 1rem;
+  width: 90%;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Remove default arrow */
+  background-image: url(...);
+  /* Add custom arrow */
+}
+
+.role-input {
+  width: 97%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 1rem;
+}
+
+.role-input .role-input-select {
+  width: 70%;
+}
+
+.signup-button {
+  margin-top: 2rem;
+  width: 90%;
+
+  border-radius: 20px;
+}

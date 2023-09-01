@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 function SignupPage() {
@@ -81,77 +84,96 @@ function SignupPage() {
   }
 
   return (
-    <div className="page-content">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            id="name"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            id="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            id="password"
-          />
-        </div>
-        <div>
-          <label htmlFor="role">You are:</label>
-          <select
-            name="role"
-            id="role"
-            onChange={handleRoleSelect}
-            value={role}
-          >
-            {roles.map((role) => (
-              <option key={role.value} value={role.value}>
-                {role.label}
-              </option>
-            ))}
-            {/* <option value={role}>Student</option>
+    <div className="signup-page">
+      <div className="page-content">
+        <h2>SIGN UP</h2>
+        <form onSubmit={handleSubmit} className="signup-form">
+          <div className="form-input">
+            <label htmlFor="name" className="input-label"></label>
+            <input
+              className="form-field"
+              type="text"
+              placeholder="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              id="name"
+            />
+          </div>
+          <div className="form-input">
+            <label className="input-label" htmlFor="email"></label>
+            <input
+              placeholder="email"
+              className="form-field"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+            />
+          </div>
+          <div className="form-input">
+            <label className="input-label" htmlFor="password"></label>
+            <input
+              placeholder="password"
+              className="form-field"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+            />
+          </div>
+          <div className="form-input role-input">
+            <h3>You are:</h3>
+            <div className="role-input-select">
+              <label className="input-label" htmlFor="role"></label>
+              <select
+                name="role"
+                id="role"
+                onChange={handleRoleSelect}
+                value={role}
+              >
+                {roles.map((role) => (
+                  <option key={role.value} value={role.value}>
+                    {role.label}
+                  </option>
+                ))}
+                {/* <option value={role}>Student</option>
           <option value={role}>Coach</option> */}
-          </select>
-          {role === "coach" && (
-            <>
-              <div>
-                <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  id="description"
-                />
-              </div>
-              <div>
-                <label htmlFor="activity">Activity</label>
-                <input
-                  type="text"
-                  value={activity}
-                  onChange={(e) => setActivity(e.target.value)}
-                  id="activity"
-                />
-              </div>
-            </>
-          )}
-        </div>
-        {error && <p>{error}</p>}
-        <button>Sign Up</button>
-      </form>
+              </select>
+              {role === "coach" && (
+                <>
+                  <div className="form-input">
+                    <label
+                      className="input-label"
+                      htmlFor="description"
+                    ></label>
+                    <input
+                      placeholder="Description"
+                      className="form-field"
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      id="description"
+                    />
+                  </div>
+                  <div className="form-input">
+                    <label className="input-label" htmlFor="activity"></label>
+                    <input
+                      placeholder="Activity"
+                      className="form-field"
+                      type="text"
+                      value={activity}
+                      onChange={(e) => setActivity(e.target.value)}
+                      id="activity"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+          {error && <p>{error}</p>}
+          <button className="signup-button">Sign Up</button>
+        </form>
+      </div>
     </div>
   );
 }
