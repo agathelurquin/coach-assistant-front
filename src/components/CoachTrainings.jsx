@@ -4,6 +4,7 @@ import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "./OneTrainingCard";
 import OneBookingCard from "./OneBookingCard";
+import CountBadge from "./CountBadge";
 
 function CoachTrainings(props) {
   const coachId = props.coachId;
@@ -80,9 +81,24 @@ function CoachTrainings(props) {
   }
   return (
     <div className="dashboard-action">
+      <div className="action-tags">
+        <Link to="/trainings">
+          <button className="tag-button">Add Training</button>
+        </Link>
+
+        <CountBadge
+          number={activeBookings.length}
+          href="#new-bookings"
+          message="New Bookings"
+        />
+        <CountBadge
+          number={cancelRequestedBookings.length}
+          href="#cancellations"
+          message="Cancellations"
+        />
+      </div>
       <div className="list-container">
         <h3 className="list-container-title">YOUR TRAININGS</h3>
-        <Link to="/trainings">Add New Training Slot</Link>
         <div className="list-card">
           {coachTrainings.map((training) => {
             return (
@@ -109,7 +125,7 @@ function CoachTrainings(props) {
         })}
       </div>
       <div className="booking-subsection list-container">
-        <h3 className="list-container-title">Classes active:</h3>
+        <h3 className="list-container-title">Classes To Come:</h3>
         {activeBookings.length === 0 && (
           <div className="empty-subsection">
             <p>No Active bookings for now 😴</p>
@@ -126,7 +142,7 @@ function CoachTrainings(props) {
           );
         })}
       </div>
-      <div className="booking-subsection">
+      <div className="booking-subsection list-container" id="new-bookings">
         <h3 className="list-container-title">Classes To Confirm:</h3>
         {pendingBookings.length === 0 && (
           <div className="empty-subsection">

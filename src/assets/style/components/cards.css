@@ -41,7 +41,7 @@
   padding: 1rem;
   border-radius: 1rem;
   background: #1d1e21;
-  box-shadow: rgb(33, 33, 33) 1.95px 1.95px 2.6px;
+  /* box-shadow: rgb(33, 33, 33) 1.95px 1.95px 2.6px; */
 }
 
 /* SINGLE TRAINING CARD */
@@ -68,7 +68,7 @@
 .booking-card {
   border-radius: 4rem;
   background: #1d1e21;
-  box-shadow: rgba(45, 45, 45, 0.491) 5px 3px 8px 0px;
+  /* box-shadow: rgba(45, 45, 45, 0.491) 5px 3px 8px 0px; */
   padding: 0.5rem 0.3rem;
   display: flex;
   justify-content: space-around;
@@ -105,4 +105,19 @@
 .empty-subsection {
   text-align: left;
   margin-left: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.action-tags {
+  display: flex;
+  justify-content: space-around;
+}
+.tag-button {
+  background-color: #5275f0;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 0.5rem;
 }
