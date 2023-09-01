@@ -57,7 +57,7 @@ function ClientDashboard() {
       </div>
 
       <div className="list-container">
-        <h3 className="list-container-title">All Classes </h3>
+        <h3 className="list-container-title">FIND A WORKOUT </h3>
         <div className="list-card all-trainings-card">
           {allTrainings.map((training) => {
             if (allTrainingsBooked.includes(training._id)) {

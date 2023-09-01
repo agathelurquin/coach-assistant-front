@@ -43,6 +43,25 @@
   background: #1d1e21;
 }
 
+/* SINGLE TRAINING CARD */
+
+.training-banner {
+  width: 100%;
+  max-height: 10vh;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons button {
+  width: 80%;
+  padding: 0.1rem;
+  background-color: #3c3c3c;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
 /* SINGLE BOOKING CARD  */
 
 .booking-card {

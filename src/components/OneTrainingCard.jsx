@@ -4,6 +4,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 // import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
@@ -67,36 +69,40 @@ function OneTrainingCard(props) {
   return (
     <div className="training-card">
       <div className="card-info">
+        <img
+          src="src/assets/img/training-card-banner.jpg"
+          alt="training card banner"
+          className="training-banner"
+        />
         <h3>{name}</h3>
         <p>{description}</p>
-        <p>
-          {`
-        ${new Intl.DateTimeFormat("en-EN", {
-          dateStyle: "short",
-          timeStyle: "short",
-        }).format(new Date(trainingDate))}`}
-          <div className="div">
-            duration: ${duration}
-            location: ${location}
-            workout: ${activityType}
-            coaching type: ${type}
-            available spots: ${availableSpots}
-            participants: ${participants}
-            status: ${booked ? "booked" : "available"}
-          </div>
+        <p className="booking-card-date">
+          <FontAwesomeIcon icon={faCalendar} className="calendar-icon" />
+          {new Intl.DateTimeFormat("en-EN", {
+            dateStyle: "short",
+            timeStyle: "short",
+          }).format(new Date(trainingDate))}
         </p>
+        <div className="div">
+          <p>
+            location: {location}
+            workout: {activityType}
+            Activity: {type}
+            Available Spots: {availableSpots}
+          </p>
+        </div>
       </div>
       <div className="card-actions">
         {user.role === "coach" ? (
-          <div className="coach-actions">
+          <div className="action-buttons coach-actions">
             <Link to={`/trainings/${oneTraining._id}`}>
               <button>Edit</button>
             </Link>
             <button onClick={handleDelete}>Delete</button>
           </div>
         ) : (
-          <div className="student-actions">
-            <button>See Class Details</button>
+          <div className=" action-buttons student-actions">
+            <button>See Details</button>
             <button
               onClick={handleBooking}
               disabled={isBooked || oneTraining.booked}
