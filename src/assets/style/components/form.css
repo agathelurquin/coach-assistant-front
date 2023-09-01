@@ -39,11 +39,12 @@ select {
 }
 
 .role-input {
-  width: 97%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding-left: 1rem;
+  text-align: left;
 }
 
 .role-input .role-input-select {
@@ -55,4 +56,11 @@ select {
   width: 90%;
   color: #ceced4;
   border-radius: 20px;
+}
+
+.date-picker {
+  background-color: #5275f0;
+  opacity: 0.7;
+  color: white;
+  border-radius: 30px;
 }
