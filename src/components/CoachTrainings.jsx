@@ -80,19 +80,23 @@ function CoachTrainings(props) {
   }
   return (
     <div className="dashboard-action">
-      <h3>My Trainings</h3>
-      <Link to="/trainings">Add New Training Slot</Link>
-      {coachTrainings.map((training) => {
-        return (
-          <OneTrainingCard
-            key={training._id}
-            training={training}
-            getAllTrainings={getAllTrainings}
-          />
-        );
-      })}
-      <div className="booking-subsection">
-        <h3>Classes Booked:</h3>
+      <div className="list-container">
+        <h3 className="list-container-title">YOUR TRAININGS</h3>
+        <Link to="/trainings">Add New Training Slot</Link>
+        <div className="list-card">
+          {coachTrainings.map((training) => {
+            return (
+              <OneTrainingCard
+                key={training._id}
+                training={training}
+                getAllTrainings={getAllTrainings}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="booking-subsection list-container">
+        <h3 className="list-container-title">Classes Booked:</h3>
         {coachBookings.map((booking) => {
           return (
             <OneBookingCard
@@ -104,8 +108,13 @@ function CoachTrainings(props) {
           );
         })}
       </div>
-      <div className="booking-subsection">
-        <h3>Classes active:</h3>
+      <div className="booking-subsection list-container">
+        <h3 className="list-container-title">Classes active:</h3>
+        {activeBookings.length === 0 && (
+          <div className="empty-subsection">
+            <p>No Active bookings for now 😴</p>
+          </div>
+        )}
         {activeBookings.map((booking) => {
           return (
             <OneBookingCard
@@ -118,7 +127,12 @@ function CoachTrainings(props) {
         })}
       </div>
       <div className="booking-subsection">
-        <h3>Classes Pending:</h3>
+        <h3 className="list-container-title">Classes To Confirm:</h3>
+        {pendingBookings.length === 0 && (
+          <div className="empty-subsection">
+            <p>No Pending bookings ✅</p>
+          </div>
+        )}
         {pendingBookings.map((booking) => {
           return (
             <OneBookingCard
@@ -130,8 +144,13 @@ function CoachTrainings(props) {
           );
         })}
       </div>
-      <div className="booking-subsection">
-        <h3>Cancel Requests:</h3>
+      <div className="booking-subsection list-container">
+        <h3 className="list-container-title">They Cancelled 😢:</h3>
+        {cancelRequestedBookings.length === 0 && (
+          <div className="empty-subsection">
+            <p>Actually no, you&#x2019;re good! </p>
+          </div>
+        )}
         {cancelRequestedBookings.map((booking) => {
           return (
             <OneBookingCard
