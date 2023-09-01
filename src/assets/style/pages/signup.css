@@ -53,6 +53,6 @@ select {
 .signup-in-button {
   margin-top: 2rem;
   width: 90%;
-
+  color: #ceced4;
   border-radius: 20px;
 }
