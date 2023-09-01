@@ -112,8 +112,9 @@
 }
 
 .booking-card button {
+  color: #5275f0;
   width: 80%;
-  padding: 0.1rem;
+  padding: 0.2rem 0;
   background-color: #3c3c3c;
   margin-top: 0.3rem;
 }
