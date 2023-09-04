@@ -109,7 +109,7 @@ function ClientDashboard() {
       <div className="list-container">
         <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
         <div className="list-card all-trainings-card">
-          {allTrainings.map((training) => {
+          {allTrainings.slice(0, 15).map((training) => {
             if (new Date(training.trainingDate) <= new Date()) {
               return (
                 <div className="training-card" key={training._id}>
