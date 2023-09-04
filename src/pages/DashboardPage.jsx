@@ -24,7 +24,15 @@ function DashboardPage() {
   return (
     <div className="page-content">
       <div className="dashboad-header">
-        <img src={avatar} className="user-avatar" alt="user-avatar" />
+        <img
+          src={
+            user.role === "coach"
+              ? "src/assets/img/default-coach-avatar.jpg"
+              : "src/assets/img/default-client-avatar.jpg"
+          }
+          className="user-avatar"
+          alt="user-avatar"
+        />
         <h2 className="page-title">
           Hey <br />
           {user.name}
