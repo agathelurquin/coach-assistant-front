@@ -9,7 +9,6 @@ function ClientDashboard(props) {
   const [allTrainings, setAllTrainings] = useState([]);
   const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
   const avatar = props.avatar;
-  console.log(avatar);
   // const [updateBookingMessage, setUpdateBookingMessage] =
   //   useState("Cancel Booking");
 
@@ -17,7 +16,16 @@ function ClientDashboard(props) {
     myApi
       .get(`${API_URL}/api/trainings`)
       .then((res) => {
-        setAllTrainings([...res.data]);
+        const response = [...res.data];
+        response.sort(function (a, b) {
+          let keyA = new Date(a.trainingDate),
+            keyB = new Date(b.trainingDate);
+          // Compare the 2 dates
+          if (keyA < keyB) return 1;
+          if (keyA > keyB) return -1;
+          return 0;
+        });
+        setAllTrainings([...response]);
       })
       .catch((e) => console.log(e));
   }

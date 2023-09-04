@@ -33,7 +33,6 @@ function OneTrainingCard(props) {
   myApi
     .get(`${API_URL}/api/users/${oneTraining.coach}`)
     .then((res) => {
-      console.log(res.data);
       setAvatar(res.data.avatar);
     })
     .catch((e) => console.log(e));
