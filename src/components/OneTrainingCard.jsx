@@ -18,15 +18,15 @@ function OneTrainingCard(props) {
   let isBooked = props.isBooked;
   const {
     name,
-    description,
+    // description,
     trainingDate,
-    duration,
+    // duration,
     location,
     activityType,
-    type,
+    // type,
     availableSpots,
-    participants,
-    booked,
+    // participants,
+    // booked,
     image,
   } = oneTraining;
 
@@ -97,7 +97,7 @@ function OneTrainingCard(props) {
               </div>
               <div className="details">
                 <span>Workout: {activityType.toUpperCase()}</span>
-                <span>Spots left: {availableSpots}</span>
+                <span className="spots">Spots left: {availableSpots}</span>
               </div>
             </p>
           </div>

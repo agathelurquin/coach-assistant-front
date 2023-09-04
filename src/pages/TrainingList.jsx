@@ -30,10 +30,10 @@ function ClientDashboard() {
           new Date(res.data[0].trainingDate)
         );
         setAllTrainings([...res.data]);
+
         for (let training of res.data) {
           if (new Date(training.trainingDate) <= new Date()) {
-            // console.log("before");
-            // setPastTrainings([...pastTrainings, training]);
+            console.log("before");
           } else {
             setTrainingCatalog([...trainingCatalog, training]);
           }
@@ -68,7 +68,6 @@ function ClientDashboard() {
       <div className="carousel">
         <Carousel autoplay>
           <div>
-            {console.log("pastTrainings", pastTrainings)}
             <h3 style={contentStyle}>{pastTrainings}</h3>
           </div>
           <div>
@@ -110,25 +109,18 @@ function ClientDashboard() {
       <div className="list-container">
         <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
         <div className="list-card all-trainings-card">
-          {pastTrainings.map((training) => {
-            return (
-              <div className="training-card" key={training._id}>
-                {allTrainingsBooked.includes(training._id) ? (
+          {allTrainings.map((training) => {
+            if (new Date(training.trainingDate) <= new Date()) {
+              return (
+                <div className="training-card" key={training._id}>
                   <OneTrainingCard
                     training={training}
                     isBooked={true}
                     getClientBookings={() => {}}
                   />
-                ) : (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={false}
-                    getClientBookings={getClientBookings}
-                    getAllTrainings={getAllTrainings}
-                  />
-                )}
-              </div>
-            );
+                </div>
+              );
+            }
           })}
         </div>
       </div>
