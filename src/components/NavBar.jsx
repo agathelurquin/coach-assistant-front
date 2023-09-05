@@ -9,7 +9,7 @@ import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ToggleButton from "@mui/material/ToggleButton";
 
 function Navbar() {
-  const { authenticateUser, isLoggedIn, user } = useContext(UserContext);
+  const { authenticateUser, isLoggedIn } = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,7 +40,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/">
           <img
-            src="src/assets/img/coach-assistant-logo.png"
+            src="../../public/coach-assistant-logo.png"
             className="logo-navbar"
             alt="home-logo"
           />
