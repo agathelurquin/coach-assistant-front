@@ -77,10 +77,18 @@ function OneTrainingCard(props) {
 
   return (
     <div className="training-card">
-      <img src={image} alt="training card banner" className="training-banner" />
+      <img
+        src={image ? image : "src/assets/img/boxing-session.jpg"}
+        alt="training card banner"
+        className="training-banner"
+      />
 
       <div className="card-info subsection">
-        <img src={avatar} alt="coach-avatar" className="coach-avatar" />
+        <img
+          src={avatar ? avatar : "src/assets/img/default-coach-avatar.jpg"}
+          alt="coach-avatar"
+          className="coach-avatar"
+        />
         <div className="info">
           <h3>{name}</h3>
           <p className="booking-card-date">

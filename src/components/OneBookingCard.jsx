@@ -55,7 +55,14 @@ function OneBookingCard(props) {
 
   const cancelActiveBooking = () => {
     console.log("one booking", oneBooking);
-    const requestBody = { ...oneBooking, status: "cancelledConfirmed" };
+    let requestBody;
+    console.log(oneBooking.status);
+    if (oneBooking.status === "active") {
+      requestBody = { ...oneBooking, status: "cancelledConfirmed" };
+    } else if (oneBooking.status === "pending") {
+      requestBody = { ...oneBooking, status: "cancelRequested" };
+      console.log("passed it to requested");
+    }
     // Here we should probably update the bookingMessage to cancelled and then setTime out to update the list
     myApi
       .patch(`${API_URL}/api/bookings/${oneBooking._id}`, requestBody)
@@ -64,7 +71,7 @@ function OneBookingCard(props) {
         setTimeout(() => {
           props.getClientBookings();
           props.getAllTrainings();
-        }, 3000);
+        }, 1000);
         console.log("booking is now cancelledConfirmed", res);
         console.log(
           "training that doesn't need to change because the booking was never accepted in the first place",
