@@ -20,6 +20,11 @@
   box-sizing: border-box;
 }
 
+.page-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */

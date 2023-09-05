@@ -2,23 +2,17 @@ import { useState, useEffect } from "react";
 import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "../components/OneTrainingCard";
-import { Carousel } from "antd";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
+import OneSliderCard from "../components/OneSliderCard";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function ClientDashboard() {
   const [clientBookings, setClientBookings] = useState([]);
   const [allTrainings, setAllTrainings] = useState([]);
   const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
   const [trainingCatalog, setTrainingCatalog] = useState([]);
-  const [pastTrainings, setPastTrainings] = useState([]);
 
-  const contentStyle = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
   function getAllTrainings() {
     myApi
       .get(`${API_URL}/api/trainings`)
@@ -30,10 +24,10 @@ function ClientDashboard() {
           new Date(res.data[0].trainingDate)
         );
         setAllTrainings([...res.data]);
+
         for (let training of res.data) {
           if (new Date(training.trainingDate) <= new Date()) {
-            // console.log("before");
-            // setPastTrainings([...pastTrainings, training]);
+            console.log("before");
           } else {
             setTrainingCatalog([...trainingCatalog, training]);
           }
@@ -62,73 +56,57 @@ function ClientDashboard() {
     getAllTrainings();
     getClientBookings();
   }, []);
-  console.log(clientBookings);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Number of visible cards at once
+    slidesToScroll: 1,
+  };
+
   return (
     <div className="page-content">
-      <div className="carousel">
-        <Carousel autoplay>
-          <div>
-            {console.log("pastTrainings", pastTrainings)}
-            <h3 style={contentStyle}>{pastTrainings}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[1]}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[2]}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[3]}</h3>
-          </div>
-        </Carousel>
+      <div className="list-container">
+        <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
+        <div className="list-card all-trainings-card">
+          <Slider {...sliderSettings}>
+            {allTrainings.slice(-15).map((training) => (
+              <div className="training-card" key={training._id}>
+                <OneSliderCard
+                  training={training}
+                  isFull={true}
+                  getClientBookings={() => {}}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
       <div className="list-container">
         <h3 className="list-container-title">FIND A WORKOUT </h3>
         <div className="list-card all-trainings-card">
           {trainingCatalog.map((training) => {
-            return (
-              <div className="training-card" key={training._id}>
-                {allTrainingsBooked.includes(training._id) ? (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={true}
-                    getClientBookings={() => {}}
-                  />
-                ) : (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={false}
-                    getClientBookings={getClientBookings}
-                    getAllTrainings={getAllTrainings}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="list-container">
-        <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
-        <div className="list-card all-trainings-card">
-          {pastTrainings.map((training) => {
-            return (
-              <div className="training-card" key={training._id}>
-                {allTrainingsBooked.includes(training._id) ? (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={true}
-                    getClientBookings={() => {}}
-                  />
-                ) : (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={false}
-                    getClientBookings={getClientBookings}
-                    getAllTrainings={getAllTrainings}
-                  />
-                )}
-              </div>
-            );
+            if (new Date(training.trainingDate) >= new Date()) {
+              return (
+                <div className="training-card" key={training._id}>
+                  {allTrainingsBooked.includes(training._id) ? (
+                    <OneTrainingCard
+                      training={training}
+                      isBooked={true}
+                      getClientBookings={() => {}}
+                    />
+                  ) : (
+                    <OneTrainingCard
+                      training={training}
+                      isBooked={false}
+                      getClientBookings={getClientBookings}
+                      getAllTrainings={getAllTrainings}
+                    />
+                  )}
+                </div>
+              );
+            }
           })}
         </div>
       </div>

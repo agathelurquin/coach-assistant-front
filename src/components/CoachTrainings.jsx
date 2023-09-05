@@ -76,6 +76,7 @@ function CoachTrainings(props) {
         setPendingBookings([...pendings]);
         setActiveBookings([...actives]);
         setCancelRequestedBookings([...cancelRequest]);
+        console.log("requested: ", cancelRequestedBookings);
       })
       .catch((e) => console.log(e));
   }
@@ -88,7 +89,7 @@ function CoachTrainings(props) {
 
         <CountBadge
           className="badge"
-          number={activeBookings.length}
+          number={pendingBookings.length}
           href="#new-bookings"
           message="New Bookings"
         />
@@ -99,10 +100,30 @@ function CoachTrainings(props) {
           message="Cancellations"
         />
       </div>
-      <div className="list-container">
-        <h3 className="list-container-title">YOUR TRAININGS</h3>
+      <div className="booking-subsection list-container">
+        <h3 className="list-container-title">Classes Booked:</h3>
         <div className="list-card">
-          {coachTrainings.map((training) => {
+          {coachBookings.map((booking) => {
+            return (
+              <OneBookingCard
+                key={booking._id}
+                oneTraining={booking.training}
+                oneBooking={booking}
+                getAllBookings={getBookedClasses}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="booking-subsection list-container">
+        <h3 className="list-container-title">Classes To Come:</h3>
+        {activeBookings.length === 0 && (
+          <div className="empty-subsection">
+            <p>No Active bookings for now 😴</p>
+          </div>
+        )}
+        <div className="list-card">
+          {coachTrainings.slice(0, 1).map((training) => {
             return (
               <OneTrainingCard
                 key={training._id}
@@ -113,37 +134,6 @@ function CoachTrainings(props) {
           })}
         </div>
       </div>
-      <div className="booking-subsection list-container">
-        <h3 className="list-container-title">Classes Booked:</h3>
-        {coachBookings.map((booking) => {
-          return (
-            <OneBookingCard
-              key={booking._id}
-              oneTraining={booking.training}
-              oneBooking={booking}
-              getAllBookings={getBookedClasses}
-            />
-          );
-        })}
-      </div>
-      <div className="booking-subsection list-container">
-        <h3 className="list-container-title">Classes To Come:</h3>
-        {activeBookings.length === 0 && (
-          <div className="empty-subsection">
-            <p>No Active bookings for now 😴</p>
-          </div>
-        )}
-        {activeBookings.map((booking) => {
-          return (
-            <OneBookingCard
-              key={booking._id}
-              oneTraining={booking.training}
-              oneBooking={booking}
-              getAllBookings={getBookedClasses}
-            />
-          );
-        })}
-      </div>
       <div className="booking-subsection list-container" id="new-bookings">
         <h3 className="list-container-title">Classes To Confirm:</h3>
         {pendingBookings.length === 0 && (
@@ -151,16 +141,19 @@ function CoachTrainings(props) {
             <p>No Pending bookings ✅</p>
           </div>
         )}
-        {pendingBookings.map((booking) => {
-          return (
-            <OneBookingCard
-              key={booking._id}
-              oneTraining={booking.training}
-              oneBooking={booking}
-              getAllBookings={getBookedClasses}
-            />
-          );
-        })}
+        <div className="list-card">
+          {pendingBookings.map((booking) => {
+            return (
+              <OneBookingCard
+                key={booking._id}
+                oneTraining={booking.training}
+                oneBooking={booking}
+                getAllBookings={getBookedClasses}
+                className="coach-cards"
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="booking-subsection list-container">
         <h3 className="list-container-title">They Cancelled 😢</h3>
@@ -169,16 +162,32 @@ function CoachTrainings(props) {
             <p>Actually no, you&#x2019;re good! </p>
           </div>
         )}
-        {cancelRequestedBookings.map((booking) => {
-          return (
-            <OneBookingCard
-              key={booking._id}
-              oneTraining={booking.training}
-              oneBooking={booking}
-              getAllBookings={getBookedClasses}
-            />
-          );
-        })}
+        <div className="list-card">
+          {cancelRequestedBookings.map((booking) => {
+            return (
+              <OneBookingCard
+                key={booking._id}
+                oneTraining={booking.training}
+                oneBooking={booking}
+                getAllBookings={getBookedClasses}
+              />
+            );
+          })}
+        </div>
+        <div className="list-container">
+          <h3 className="list-container-title">YOUR TRAININGS</h3>
+          <div className="list-card">
+            {coachTrainings.map((training) => {
+              return (
+                <OneTrainingCard
+                  key={training._id}
+                  training={training}
+                  getAllTrainings={getAllTrainings}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
