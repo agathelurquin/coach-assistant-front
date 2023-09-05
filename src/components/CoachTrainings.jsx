@@ -135,7 +135,9 @@ function CoachTrainings(props) {
         </div>
       </div>
       <div className="booking-subsection list-container" id="new-bookings">
-        <h3 className="list-container-title">Classes To Confirm:</h3>
+        <h3 className="list-container-title" id="cancellations">
+          Classes To Confirm:
+        </h3>
         {pendingBookings.length === 0 && (
           <div className="empty-subsection">
             <p>No Pending bookings ✅</p>
