@@ -105,7 +105,7 @@ function OneSliderCard(props) {
         </div>
       </div>
       <div className="card-actions">
-        {user.role === "coach" ? (
+        {oneTraining.coach === user._id ? (
           <div className="action-buttons coach-actions">
             <Link to={`/trainings/${oneTraining._id}`}>
               <button>Edit</button>
