@@ -71,7 +71,7 @@ function ClientDashboard() {
         <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
         <div className="list-card all-trainings-card">
           <Slider {...sliderSettings}>
-            {allTrainings.slice(0, 15).map((training) => (
+            {allTrainings.slice(-15).map((training) => (
               <div className="training-card" key={training._id}>
                 <OneSliderCard
                   training={training}

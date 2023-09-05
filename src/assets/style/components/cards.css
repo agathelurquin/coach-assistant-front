@@ -149,3 +149,7 @@ html {
 .disabled {
   color: #747474 !important;
 }
+
+.disabled:hover {
+  border: none;
+}
