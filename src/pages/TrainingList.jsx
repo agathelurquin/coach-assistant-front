@@ -2,23 +2,17 @@ import { useState, useEffect } from "react";
 import myApi from "../api/service";
 const API_URL = import.meta.env.VITE_API_URL;
 import OneTrainingCard from "../components/OneTrainingCard";
-import { Carousel } from "antd";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
+import OneSliderCard from "../components/OneSliderCard";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function ClientDashboard() {
   const [clientBookings, setClientBookings] = useState([]);
   const [allTrainings, setAllTrainings] = useState([]);
   const [allTrainingsBooked, setAllTrainingsBooked] = useState([]);
   const [trainingCatalog, setTrainingCatalog] = useState([]);
-  const [pastTrainings, setPastTrainings] = useState([]);
 
-  const contentStyle = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
   function getAllTrainings() {
     myApi
       .get(`${API_URL}/api/trainings`)
@@ -62,24 +56,32 @@ function ClientDashboard() {
     getAllTrainings();
     getClientBookings();
   }, []);
-  console.log(clientBookings);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Number of visible cards at once
+    slidesToScroll: 1,
+  };
+
   return (
     <div className="page-content">
-      <div className="carousel">
-        <Carousel autoplay>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[1]}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[2]}</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>{pastTrainings[3]}</h3>
-          </div>
-        </Carousel>
+      <div className="list-container">
+        <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
+        <div className="list-card all-trainings-card">
+          <Slider {...sliderSettings}>
+            {allTrainings.slice(0, 15).map((training) => (
+              <div className="training-card" key={training._id}>
+                <OneSliderCard
+                  training={training}
+                  isFull={true}
+                  getClientBookings={() => {}}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
       <div className="list-container">
         <h3 className="list-container-title">FIND A WORKOUT </h3>
@@ -103,24 +105,6 @@ function ClientDashboard() {
                 )}
               </div>
             );
-          })}
-        </div>
-      </div>
-      <div className="list-container">
-        <h3 className="list-container-title">YOU JUST MISSED THEM !</h3>
-        <div className="list-card all-trainings-card">
-          {allTrainings.slice(0, 15).map((training) => {
-            if (new Date(training.trainingDate) <= new Date()) {
-              return (
-                <div className="training-card" key={training._id}>
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={true}
-                    getClientBookings={() => {}}
-                  />
-                </div>
-              );
-            }
           })}
         </div>
       </div>

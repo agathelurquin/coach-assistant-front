@@ -145,3 +145,7 @@ html {
   border-radius: 30px;
   font-size: 0.7rem;
 }
+
+.disabled {
+  color: #747474 !important;
+}
