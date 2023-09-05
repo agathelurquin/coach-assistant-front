@@ -87,24 +87,26 @@ function ClientDashboard() {
         <h3 className="list-container-title">FIND A WORKOUT </h3>
         <div className="list-card all-trainings-card">
           {trainingCatalog.map((training) => {
-            return (
-              <div className="training-card" key={training._id}>
-                {allTrainingsBooked.includes(training._id) ? (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={true}
-                    getClientBookings={() => {}}
-                  />
-                ) : (
-                  <OneTrainingCard
-                    training={training}
-                    isBooked={false}
-                    getClientBookings={getClientBookings}
-                    getAllTrainings={getAllTrainings}
-                  />
-                )}
-              </div>
-            );
+            if (new Date(training.trainingDate) >= new Date()) {
+              return (
+                <div className="training-card" key={training._id}>
+                  {allTrainingsBooked.includes(training._id) ? (
+                    <OneTrainingCard
+                      training={training}
+                      isBooked={true}
+                      getClientBookings={() => {}}
+                    />
+                  ) : (
+                    <OneTrainingCard
+                      training={training}
+                      isBooked={false}
+                      getClientBookings={getClientBookings}
+                      getAllTrainings={getAllTrainings}
+                    />
+                  )}
+                </div>
+              );
+            }
           })}
         </div>
       </div>
