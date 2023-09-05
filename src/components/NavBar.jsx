@@ -9,7 +9,7 @@ import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ToggleButton from "@mui/material/ToggleButton";
 
 function Navbar() {
-  const { authenticateUser, isLoggedIn } = useContext(UserContext);
+  const { authenticateUser, isLoggedIn, user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
