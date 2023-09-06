@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OneBookingCard(props) {
   const { user } = useContext(UserContext);
-  const oneTraining = props.oneTraining;
+  const oneTraining = props.oneBooking.training;
   const [updateBookingMessage, setUpdateBookingMessage] =
     useState("Cancel Booking");
 
@@ -26,7 +26,7 @@ function OneBookingCard(props) {
   const resetTrainingAfterCancel = () => {
     if (oneBooking.status === "active") {
       console.log("adding a step to update the training");
-      console.log("oneTraining.participants", oneTraining.participants);
+      console.log("oneTraining.participants", oneTraining);
       console.log(
         "oneBooking.client to find in the participants list",
         oneBooking.client
