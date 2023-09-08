@@ -12,7 +12,7 @@ function OneBookingCard(props) {
   const { user } = useContext(UserContext);
   const oneTraining = props.oneBooking.training;
   const [updateBookingMessage, setUpdateBookingMessage] =
-    useState("Cancel Booking");
+    useState("CANCEL BOOKING");
 
   const oneBooking = props.oneBooking;
   // const flashMessage = props.flashMessage;

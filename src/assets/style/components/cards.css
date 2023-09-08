@@ -64,13 +64,20 @@
   margin-top: 1rem;
 }
 
+.action-buttons button:hover,
+.coach-actions button:hover,
+.booking-card button:hover {
+  background-color: #8fa5f5;
+  color: var(--dark-bg-grey);
+}
+
 .action-buttons button {
   /* width: 80%; */
   /* padding: 0.1rem; */
   background-color: var(--lighter-gb-grey);
   margin-top: 0.3rem;
   font-size: 0.8rem;
-  color: var(--ligth-blue);
+  color: #8fa5f5;
 }
 .coach-actions button {
   /* width: 80%; */
@@ -116,9 +123,10 @@
 }
 
 .booking-card button {
-  color: var(--ligth-blue);
-  width: 80%;
-  padding: 0.2rem 0;
+  color: #8fa5f5;
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  font-weight: bold;
   background-color: var(--lighter-gb-grey);
   margin-top: 0.3rem;
 }
