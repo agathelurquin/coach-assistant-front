@@ -142,7 +142,14 @@ function OneBookingCard(props) {
   };
   return (
     <div className="booking-card">
-      <img src="src/assets/img/booking-image.jpg" alt="booking-image" />
+      <img
+        src={
+          `${oneBooking.training.image}`
+            ? oneBooking.training.image
+            : "src/assets/img/booking-image.jpg"
+        }
+        alt="booking-image"
+      />
       <div className="booking-card-info">
         <p className="booking-card-name">{oneBooking.training.name}</p>
         <p className="booking-card-date">
