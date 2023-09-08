@@ -15,6 +15,7 @@ function CoachTrainings(props) {
   const [pendingBookings, setPendingBookings] = useState([]);
   const [activeBookings, setActiveBookings] = useState([]);
   const [cancelRequestedBookings, setCancelRequestedBookings] = useState([]);
+  const [flashMessage, setFlashMessage] = useState("");
 
   const pendings = [];
   const actives = [];
@@ -88,6 +89,8 @@ function CoachTrainings(props) {
   }
   return (
     <div className="dashboard-action">
+      {flashMessage && <div className="flash-message">{flashMessage}</div>}
+
       <div className="action-tags">
         <Link to="/trainings">
           <button className="tag-button">Add Training</button>
@@ -116,6 +119,8 @@ function CoachTrainings(props) {
                 oneTraining={booking.training}
                 oneBooking={booking}
                 getAllBookings={getBookedClasses}
+                flashMessage={flashMessage}
+                setFlashMessage={setFlashMessage}
               />
             );
           })}
@@ -158,6 +163,8 @@ function CoachTrainings(props) {
                 oneBooking={booking}
                 getAllBookings={getBookedClasses}
                 className="coach-cards"
+                flashMessage={flashMessage}
+                setFlashMessage={setFlashMessage}
               />
             );
           })}
@@ -178,6 +185,8 @@ function CoachTrainings(props) {
                 oneTraining={booking.training}
                 oneBooking={booking}
                 getAllBookings={getBookedClasses}
+                flashMessage={flashMessage}
+                setFlashMessage={setFlashMessage}
               />
             );
           })}
