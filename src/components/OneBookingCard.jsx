@@ -15,7 +15,7 @@ function OneBookingCard(props) {
     useState("Cancel Booking");
 
   const oneBooking = props.oneBooking;
-  const flashMessage = props.flashMessage;
+  // const flashMessage = props.flashMessage;
   const setFlashMessage = props.setFlashMessage;
 
   const updateModel = (model) => {
@@ -144,9 +144,9 @@ function OneBookingCard(props) {
     <div className="booking-card">
       <img
         src={
-          `${oneBooking.training.image}`
-            ? oneBooking.training.image
-            : "src/assets/img/booking-image.jpg"
+          // `${oneBooking.training.image}`
+          //   ? oneBooking.training.image
+          "src/assets/img/booking-image.jpg"
         }
         alt="booking-image"
       />

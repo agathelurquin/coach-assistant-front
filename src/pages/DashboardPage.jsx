@@ -3,6 +3,8 @@ import { UserContext } from "../context/AuthContext";
 import CoachTrainings from "../components/CoachTrainings";
 import ClientDashboard from "../components/ClientDashboard";
 import myApi from "../api/service";
+import defaultCoach from "./../assets/img/default_avatar.png";
+import defaultClient from "./../assets/img/olivia-avatar.png";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function DashboardPage() {
@@ -25,11 +27,7 @@ function DashboardPage() {
     <div className="page-content">
       <div className="dashboad-header">
         <img
-          src={
-            user.role === "coach"
-              ? "src/assets/img/default-coach-avatar.jpg"
-              : "src/assets/img/default-client-avatar.jpg"
-          }
+          src={user.role === "coach" ? defaultCoach : defaultClient}
           className="user-avatar"
           alt="user-avatar"
         />
