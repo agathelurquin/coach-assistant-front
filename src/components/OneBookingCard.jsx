@@ -71,8 +71,8 @@ function OneBookingCard(props) {
         setUpdateBookingMessage("Cancelled");
         setTimeout(() => {
           props.getClientBookings();
-          props.getAllTrainings();
-        }, 1000);
+          props.getAllBookings();
+        }, 2000);
         console.log("booking is now cancelledConfirmed", res);
         console.log(
           "training that doesn't need to change because the booking was never accepted in the first place",
