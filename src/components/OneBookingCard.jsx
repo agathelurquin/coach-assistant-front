@@ -70,7 +70,7 @@ function OneBookingCard(props) {
       .then((res) => {
         setUpdateBookingMessage("Cancelled");
         setTimeout(() => {
-          props.getClientBookings();
+          // props.getClientBookings();
           props.getAllBookings();
         }, 2000);
         console.log("booking is now cancelledConfirmed", res);
@@ -100,6 +100,9 @@ function OneBookingCard(props) {
     myApi
       .patch(`${API_URL}/api/bookings/${oneBooking._id}`, requestBody)
       .then((res) => {
+        setTimeout(() => {
+          props.getAllBookings();
+        }, 200);
         console.log("booking updated", res);
         console.log("training updated", oneTraining);
       })
