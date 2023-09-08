@@ -72,6 +72,9 @@
   z-index: -1;
 }
 
+img {
+  object-fit: cover;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

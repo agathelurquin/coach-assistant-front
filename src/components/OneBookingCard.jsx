@@ -15,7 +15,7 @@ function OneBookingCard(props) {
     useState("Cancel Booking");
 
   const oneBooking = props.oneBooking;
-  const flashMessage = props.flashMessage;
+  // const flashMessage = props.flashMessage;
   const setFlashMessage = props.setFlashMessage;
 
   const updateModel = (model) => {

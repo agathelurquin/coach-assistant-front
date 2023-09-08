@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import defaultTrainingBanner from "./../assets/img/boxing-session.jpg";
+import defaultCoach from "./../assets/img/default-coach-avatar.jpg";
 
 function OneTrainingCard(props) {
   const { user } = useContext(UserContext);
@@ -78,14 +80,14 @@ function OneTrainingCard(props) {
   return (
     <div className="training-card">
       <img
-        src={image ? image : "src/assets/img/boxing-session.jpg"}
+        src={image ? image : defaultTrainingBanner}
         alt="training card banner"
         className="training-banner"
       />
 
       <div className="card-info subsection">
         <img
-          src={avatar ? avatar : "src/assets/img/default-coach-avatar.jpg"}
+          src={avatar ? avatar : defaultCoach}
           alt="coach-avatar"
           className="coach-avatar"
         />
