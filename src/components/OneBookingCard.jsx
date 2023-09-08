@@ -8,8 +8,9 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OneBookingCard(props) {
+  console.log("props", props);
   const { user } = useContext(UserContext);
-  const oneTraining = props.oneTraining;
+  const oneTraining = props.oneBooking.training;
   const [updateBookingMessage, setUpdateBookingMessage] =
     useState("Cancel Booking");
 
@@ -26,7 +27,7 @@ function OneBookingCard(props) {
   const resetTrainingAfterCancel = () => {
     if (oneBooking.status === "active") {
       console.log("adding a step to update the training");
-      console.log("oneTraining.participants", oneTraining.participants);
+      console.log("oneTraining.participants", oneTraining);
       console.log(
         "oneBooking.client to find in the participants list",
         oneBooking.client
@@ -70,8 +71,8 @@ function OneBookingCard(props) {
         setUpdateBookingMessage("Cancelled");
         setTimeout(() => {
           props.getClientBookings();
-          props.getAllTrainings();
-        }, 1000);
+          props.getAllBookings();
+        }, 2000);
         console.log("booking is now cancelledConfirmed", res);
         console.log(
           "training that doesn't need to change because the booking was never accepted in the first place",
@@ -91,6 +92,7 @@ function OneBookingCard(props) {
     resetTrainingAfterCancel();
     cancelActiveBooking();
     setUpdateBookingMessage("Cancelled");
+    props.getAllBookings();
   };
 
   const handleConfirmCancellation = () => {
@@ -124,9 +126,10 @@ function OneBookingCard(props) {
     updateModel(updatedBooking);
     myApi
       .patch(`${API_URL}/api/bookings/${oneBooking._id}`, updatedBooking)
-      .then((res) =>
-        console.log("we updated the booking status to active", res.data)
-      )
+      .then((res) => {
+        props.getAllBookings();
+        console.log("we updated the booking status to active", res.data);
+      })
       .catch((e) => console.log(e));
   };
   return (

@@ -37,14 +37,8 @@ function Navbar() {
 
   return (
     <div className={`navbar ${isMobileMenuOpen ? "open" : ""}`}>
-      <div className="logo">
-        <Link to="/">
-          <img
-            src="../../public/coach-assistant-logo.png"
-            className="logo-navbar"
-            alt="home-logo"
-          />
-        </Link>
+      <div className="logo-navbar">
+        <Link to="/"></Link>
       </div>
       {isLoggedIn ? (
         <div className={`nav-links ${isMobileMenuOpen ? "open" : ""}`}>

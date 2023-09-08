@@ -44,7 +44,13 @@ function CoachTrainings(props) {
     myApi
       .get(`${API_URL}/api/bookings/coach`)
       .then((res) => {
-        setCoachBookings(res.data);
+        let activeBookings = [];
+        res.data.forEach((booking) => {
+          if (booking.status === "active") {
+            activeBookings.push(booking);
+          }
+        });
+        setCoachBookings(activeBookings);
 
         console.log("response", res.data, "stored", coachBookings);
         console.log("are coach trainings updated", coachBookings);
@@ -135,7 +141,9 @@ function CoachTrainings(props) {
         </div>
       </div>
       <div className="booking-subsection list-container" id="new-bookings">
-        <h3 className="list-container-title">Classes To Confirm:</h3>
+        <h3 className="list-container-title" id="cancellations">
+          Classes To Confirm:
+        </h3>
         {pendingBookings.length === 0 && (
           <div className="empty-subsection">
             <p>No Pending bookings ✅</p>
