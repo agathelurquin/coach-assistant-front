@@ -8,6 +8,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function OneBookingCard(props) {
+  console.log("props", props);
   const { user } = useContext(UserContext);
   const oneTraining = props.oneBooking.training;
   const [updateBookingMessage, setUpdateBookingMessage] =
@@ -91,6 +92,7 @@ function OneBookingCard(props) {
     resetTrainingAfterCancel();
     cancelActiveBooking();
     setUpdateBookingMessage("Cancelled");
+    props.getAllBookings();
   };
 
   const handleConfirmCancellation = () => {
@@ -124,9 +126,10 @@ function OneBookingCard(props) {
     updateModel(updatedBooking);
     myApi
       .patch(`${API_URL}/api/bookings/${oneBooking._id}`, updatedBooking)
-      .then((res) =>
-        console.log("we updated the booking status to active", res.data)
-      )
+      .then((res) => {
+        props.getAllBookings();
+        console.log("we updated the booking status to active", res.data);
+      })
       .catch((e) => console.log(e));
   };
   return (

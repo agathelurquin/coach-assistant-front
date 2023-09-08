@@ -44,7 +44,13 @@ function CoachTrainings(props) {
     myApi
       .get(`${API_URL}/api/bookings/coach`)
       .then((res) => {
-        setCoachBookings(res.data);
+        let activeBookings = [];
+        res.data.forEach((booking) => {
+          if (booking.status === "active") {
+            activeBookings.push(booking);
+          }
+        });
+        setCoachBookings(activeBookings);
 
         console.log("response", res.data, "stored", coachBookings);
         console.log("are coach trainings updated", coachBookings);
