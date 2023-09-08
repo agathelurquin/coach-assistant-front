@@ -137,14 +137,13 @@ html {
   display: flex;
   justify-content: start;
   max-width: 30rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 .tag-button {
   background-color: var(--ligth-blue);
   color: #fff;
   border-radius: 30px;
-  font-size: 0.5rem;
-  padding: 0.5rem;
+  font-size: 0.7rem;
 }
 
 .disabled {

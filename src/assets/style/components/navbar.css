@@ -32,12 +32,8 @@
   padding: 0 1rem;
 }
 .logo-navbar {
-  background-image: url("../../img/coach-assistant-logo.png");
-  background-position: center;
-  background-size: contain;
   width: 2rem;
-  height: 2rem;
-  margin: 1rem 0;
+  display: block;
 }
 
 .nav-links ul {
