@@ -3,8 +3,8 @@ import { UserContext } from "../context/AuthContext";
 import CoachTrainings from "../components/CoachTrainings";
 import ClientDashboard from "../components/ClientDashboard";
 import myApi from "../api/service";
-import defaultCoach from "./../assets/img/default_avatar.png";
-import defaultClient from "./../assets/img/olivia-avatar.png";
+import defaultCoach from "./../assets/img/default-coach-avatar.jpg";
+import defaultClient from "./../assets/img/default-client-avatar.jpg";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function DashboardPage() {
